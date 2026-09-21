@@ -7,7 +7,6 @@ RUN npm ci
 
 COPY . .
 ENV DATABASE_URL=postgresql://postgres:postgres@db:5432/empresti
-ENV MIGRATION_DATABASE_URL=postgresql://postgres:postgres@db:5432/empresti
 RUN npm run build
 
 EXPOSE 3000

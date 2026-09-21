@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Empréstimo de Equipamentos</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; background: #07111f; color: #eef7ff; }
+    main { width: min(680px, calc(100% - 3rem)); padding: 2rem; border: 1px solid #21415d; border-radius: 16px; background: #0d1b2a; }
+    h1 { margin-top: 0; }
+    .status { display: flex; align-items: center; gap: .75rem; padding: 1rem; border-radius: 10px; background: #13283b; }
+    .dot { width: .8rem; height: .8rem; border-radius: 50%; background: #ffd166; }
+    .ok .dot { background: #06d6a0; }
+    .error .dot { background: #ef476f; }
+    code { color: #78dce8; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Empréstimo de Equipamentos</h1>
+    <p>Andar zero: prova de integração entre front-end, FastAPI e PostgreSQL.</p>
+    <div id="health" class="status">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Consultando <code>GET /health</code>…</span>
+    </div>
+  </main>
+  <script>
+    const health = document.querySelector('#health');
+    fetch('/health')
+      .then(async (response) => ({ ok: response.ok, body: await response.json() }))
+      .then(({ ok, body }) => {
+        health.classList.add(ok ? 'ok' : 'error');
+        health.querySelector('span:last-child').textContent = `${body.status}: ${body.database}`;
+      })
+      .catch(() => {
+        health.classList.add('error');
+        health.querySelector('span:last-child').textContent = 'não foi possível consultar a API';
+      });
+  </script>
+</body>
+</html>
+

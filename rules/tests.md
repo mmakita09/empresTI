@@ -21,10 +21,9 @@ Ao escrever, alterar ou remover qualquer teste.
 
 ## Verificação
 
-`.venv/Scripts/python -m pytest` termina sem falhas.
+`npm test` termina sem falhas.
 
 ## Não faça
 
 - Não aceite teste que dependa da ordem de execução.
 - Não trate mock como prova de integração com PostgreSQL.
-

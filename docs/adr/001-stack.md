@@ -4,73 +4,75 @@
 
 | Item | Escolha |
 |---|---|
-| Linguagem/runtime | Python 3 |
-| Framework do backend | FastAPI |
-| Estilo da API | REST com JSON |
-| Front-end: com build ou sem | HTML, CSS e JavaScript sem build |
-| Como o front é servido | Pelo mesmo processo do backend |
-| Autenticação/sessão | E-mail e senha; sessão no PostgreSQL identificada por cookie `HttpOnly` |
-| Autorização | RBAC simples com os papéis `COLABORADOR` e `OPERACOES`, verificado no backend |
-| Acesso ao banco | SQLAlchemy ORM |
-| Migrations | Alembic com migrations versionadas |
-| Testes | Pytest com testes unitários e de integração usando PostgreSQL de teste |
-| Execução local | Docker Compose; `docker compose up --build` |
-| Banco | PostgreSQL |
+| Arquitetura | Monolito em um repositório e um projeto Vercel |
+| Aplicação | Next.js App Router com TypeScript `strict` |
+| Interface | React, Tailwind CSS e shadcn/ui |
+| Estado e formulários | TanStack Query, React Hook Form e Zod |
+| API | tRPC em Route Handlers, com superjson |
+| Organização do servidor | Router → Service → Prisma |
+| Banco | PostgreSQL gerenciado pelo Supabase |
+| ORM e migrations | Prisma ORM e Prisma Migrate como dono único do schema |
+| Autenticação | Supabase Auth com cookie `HttpOnly` via `@supabase/ssr` |
+| Autorização | Middlewares tRPC e RLS como defesa em profundidade |
+| Multi-tenancy | Banco único com `tenant_id` nas tabelas de domínio |
+| Testes | Vitest, Testing Library, Testcontainers e Playwright |
+| Execução local | Docker Compose |
+| Hospedagem | Vercel; migration executada fora do boot serverless |
 
 ## Justificativas
 
-- **Linguagem/runtime:** Python 3 permite implementar backend e testes usando a mesma linguagem.
-- **Framework do backend:** FastAPI atende à API com pouca configuração inicial.
-- **Estilo da API:** REST com JSON cobre as operações simples de catálogo e empréstimo.
-- **Front sem etapa de build:** o PRD pede cinco telas simples e nenhuma interação rica. Uma etapa de build adicionaria um segundo ambiente para manter e depurar, sem entregar nada que o PRD peça.
-- **Como o front é servido:** usar o mesmo processo reduz a quantidade de serviços para executar e publicar.
-- **Autenticação/sessão:** manter a sessão no PostgreSQL permite invalidá-la no servidor, enquanto o cookie identifica a sessão no navegador.
-- **Autorização:** dois papéis são suficientes para distinguir colaborador de Operações nas regras descritas.
-- **Acesso ao banco:** SQLAlchemy concentra o mapeamento entre os objetos do sistema e as tabelas.
-- **Migrations:** Alembic mantém cada mudança do schema registrada e aplicável na ordem.
-- **Testes:** Pytest cobre regras isoladas e o caminho integrado entre API e banco.
-- **Execução local:** Docker Compose sobe aplicação e PostgreSQL do mesmo jeito em máquinas diferentes.
-- **Banco:** PostgreSQL já foi decidido pelo time e não está em discussão.
+- **Arquitetura:** não há equipes separadas para front e servidor; separar criaria dois deploys e uma fronteira HTTP para manter.
+- **Aplicação:** o front e o servidor ficam no mesmo projeto e sobem juntos.
+- **Interface:** as telas precisam reproduzir o design sem impor o visual de uma biblioteca fechada.
+- **Estado e formulários:** o cache de servidor e a validação dos formulários ficam em caminhos definidos.
+- **API:** o tipo do procedimento chega ao cliente sem contrato escrito duas vezes.
+- **Organização do servidor:** o procedimento cuida de entrada e permissão; a regra de negócio fica testável no service.
+- **Banco:** PostgreSQL no Supabase já faz parte da infraestrutura definida.
+- **ORM e migrations:** ter um único dono do schema evita divergência entre ambientes.
+- **Autenticação:** mesma origem permite sessão em cookie sem expor token ao JavaScript.
+- **Autorização:** permissão é verificada no servidor e o RLS permanece como última barreira.
+- **Multi-tenancy:** adicionar a coluna desde o início evita backfill e revisão de todas as consultas depois.
+- **Testes:** regras, componentes, banco real e fluxos críticos precisam de níveis diferentes de verificação.
+- **Execução local:** um comando sobe aplicação, migration, seed e PostgreSQL.
+- **Hospedagem:** migrations não podem disputar execução durante a inicialização de várias functions.
 
 ## Alternativas descartadas
 
-- **TypeScript com Node.js LTS:** descartado porque manteria outra cadeia de ferramentas sem necessidade indicada pelo PRD.
-- **NestJS:** descartado porque adicionaria mais estrutura inicial ao backend deste projeto pequeno.
-- **GraphQL:** descartado porque os fluxos previstos não exigem consultas definidas livremente pelo cliente.
-- **Front com framework e build próprio:** descartado porque o custo de manter dois processos e dois pipelines não se paga em cinco telas. Se aparecerem telas com estado complexo, este ADR deve ser revisto.
-- **Front-end e backend separados:** descartado porque exigiria dois processos e mais configuração de integração e publicação.
-- **JWT armazenado no navegador:** descartado porque revogar a sessão antes do vencimento ficaria mais trabalhoso.
-- **Permissões configuráveis por recurso:** descartado porque o PRD possui somente os papéis Colaborador e Operações.
-- **SQL direto com psycopg:** descartado porque repetiria o mapeamento entre resultados SQL e objetos do sistema.
-- **Scripts SQL manuais:** descartado porque dificultariam controlar quais mudanças do schema já foram aplicadas.
-- **`unittest` com testes manuais:** descartado porque manteria dois modos de verificação e deixaria parte do resultado dependente de conferência manual.
-- **Instalação manual de Python e PostgreSQL:** descartada porque aumentaria as diferenças de configuração entre as máquinas.
-- **Outro banco de dados:** não foi considerado, pois PostgreSQL já estava decidido pelo time.
+- **Front e API separados:** descartado porque criaria CORS, dois deploys e uma fronteira sem equipe separada.
+- **REST ou GraphQL:** descartados porque, com cliente e servidor TypeScript no mesmo projeto, o tRPC mantém o contrato sem geração.
+- **Server Actions e acesso direto ao Prisma em Server Components:** descartados porque criariam outros caminhos de leitura, mutação e autorização.
+- **Supabase CLI como dono das migrations:** descartado porque dois donos do mesmo schema podem se sobrescrever.
+- **RLS como autorização primária:** descartado porque o Prisma usa conexão de servidor; aplicar contexto por request exigiria outra estratégia transacional.
+- **Cadastro aberto:** descartado porque o sistema guarda inventário interno e não existe domínio corporativo definido para filtrar.
+- **Redux ou Zustand:** descartados porque o estado local restante cabe em React depois do cache do TanStack Query.
+- **Schema ou banco por tenant:** descartado porque multiplicaria cada migration sem exigência do PRD.
+- **Mocks do Prisma como prova de integração:** descartados porque não exercitam constraints, transações nem policies.
 
 ## Consequências
 
 ### O que fica mais fácil
 
-- Subir o projeto e o PostgreSQL de forma reproduzível com Docker Compose.
-- Publicar front-end e backend juntos.
-- Revogar sessões no servidor.
-- Evoluir o schema com migrations versionadas.
-- Testar regras e integração usando um único framework de testes.
+- Publicar interface e servidor juntos.
+- Detectar no build mudanças de contrato entre procedimento e tela.
+- Compartilhar validação e tipos dentro do repositório.
+- Manter um único histórico de schema com Prisma Migrate.
 
 ### O que fica mais difícil
 
-- Criar interfaces com muitas interações no navegador sem adotar posteriormente uma ferramenta de build.
-- Escalar ou publicar front-end e backend de maneira independente.
-- Manter sessões exige tabela, expiração e limpeza dos registros no PostgreSQL.
+- Escalar interface e servidor separadamente.
+- Impedir imports indevidos entre código de cliente e servidor.
+- Controlar latência entre functions da Vercel e banco em São Paulo.
+- Manter middlewares e policies de RLS coerentes.
 
-### O que não muda depois sem custo
+### O que isso impede de fazer depois sem custo
 
-- Separar front-end e backend altera execução, publicação, autenticação e comunicação entre as duas partes.
-- Trocar SQLAlchemy e Alembic exige adaptar acesso a dados e histórico de migrations.
-- Trocar sessões no servidor por JWT altera o fluxo de login, revogação e autorização.
-- Trocar PostgreSQL exige revisar schema, migrations, consultas, testes e execução local.
+- Atender consumidores que não usam TypeScript exige expor outra API.
+- Separar o servidor do front rompe o acoplamento de tipos do tRPC.
+- Trocar Prisma exige migrar o histórico de schema e o SQL complementar.
+- Processos longos, filas e conexões abertas exigem infraestrutura fora das functions da Vercel.
 
 ## O que este ADR não decide
 
-Este ADR não decide o modelo de dados, a organização de pastas, o formato detalhado dos erros da API, os nomes das variáveis de ambiente, a duração da sessão nem os comportamentos de negócio que continuam em aberto no PRD.
+Este ADR não decide entidades de domínio, design visual, matriz detalhada de permissões, respostas para as questões abertas do PRD, política de branches, backup, LGPD, SLO ou orçamento.
 
+O detalhamento que fundamenta esta decisão está em `stacks.md`.

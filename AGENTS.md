@@ -5,6 +5,7 @@ Sistema web interno para controlar empréstimos de equipamentos.
 ## Onde olhar
 
 - `docs/prd.md` — define o problema, os usuários e as regras de negócio.
+- `stacks.md` — é a base detalhada da arquitetura aceita.
 - `docs/adr/` — registra decisões técnicas e seus motivos.
 - `rules/restrictions.md` — define os limites de atuação do agente.
 - `docs/specs/` — contém spec, plano e tarefas de cada funcionalidade.
@@ -36,37 +37,37 @@ Se uma informação não estiver documentada, pergunte. Não invente uma decisã
 
 ## Mapa do projeto
 
-- `app/main.py` — aplicação FastAPI e rotas HTTP.
-- `app/config.py` — leitura e validação das variáveis de ambiente.
-- `app/database.py` — engine SQLAlchemy e verificação do banco.
-- `app/static/` — front HTML, CSS e JavaScript sem build.
-- `migrations/` — migrations Alembic versionadas.
-- `tests/` — testes automatizados com pytest.
+- `src/app/` — páginas e Route Handlers do Next.js.
+- `src/server/api/` — contexto, routers e procedimentos tRPC.
+- `src/server/services/` — regras e operações do servidor.
+- `src/server/db.ts` — singleton do Prisma.
+- `prisma/` — schema, migrations e seed.
+- `tests/` — testes automatizados com Vitest.
 - `docs/andar-zero.md` — critérios técnicos anteriores às funcionalidades.
 
 ## Comandos comprovados
 
 - Subir aplicação e PostgreSQL: `docker compose up --build`
-- Verificar a aplicação: abrir `http://localhost:8000`
-- Executar os testes: `pytest`
-- Aplicar migrations: `alembic upgrade head`
-- Criar migration: `alembic revision -m "descricao"`
+- Verificar a aplicação: abrir `http://localhost:3000`
+- Executar os testes: `npm test`
+- Aplicar migrations: `npm run db:deploy`
+- Criar migration: `npm run db:migrate -- --name descricao`
+- Gerar o Prisma Client: `npm run db:generate`
 
-No Docker Compose, a aplicação aplica `alembic upgrade head` antes de iniciar o servidor.
+No Docker Compose, a aplicação aplica `prisma migrate deploy` e o seed antes de iniciar o servidor.
 
 ## Convenções
 
-- Python 3.13, FastAPI, SQLAlchemy 2, Alembic e pytest.
-- APIs REST com JSON.
-- Front servido pelo mesmo backend, sem etapa de build.
-- Acesso ao PostgreSQL somente pelo backend.
+- Node.js 24, TypeScript `strict`, Next.js App Router, tRPC, Prisma e Vitest.
+- Front e servidor no mesmo projeto e deploy.
+- Acesso ao PostgreSQL somente pelo servidor via Prisma.
 - Toda mudança de schema precisa de migration; não edite o banco manualmente.
 - Testes não podem depender do banco de produção.
 - Nomes de arquivos, funções e variáveis em inglês; textos da interface e documentação em português.
 
 ## Verificação antes do handoff
 
-- Execute `pytest`.
+- Execute `npm test`, `npm run lint` e `npm run build`.
 - Suba o Compose quando a mudança afetar inicialização, banco ou migration.
-- Confira `GET /health` e a página inicial.
+- Confira `GET /api/health`, o procedimento tRPC e a página inicial.
 - Revise o diff em busca de credenciais antes de qualquer commit.

@@ -1,11 +1,14 @@
 .git
+node_modules
+.next
+coverage
 .venv
 __pycache__
 .pytest_cache
+*.pyc
+.legacy-python-app-cache
+.legacy-alembic-cache
 .env
 .env.*
 !.env.example
-*.pyc
 .txt
-stacks_H.md
-

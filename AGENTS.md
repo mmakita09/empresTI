@@ -34,9 +34,39 @@ Se uma informação não estiver documentada, pergunte. Não invente uma decisã
 - Configurações e segredos devem vir de variáveis de ambiente.
 - Não revele valores secretos em logs, documentação ou mensagens.
 
-## Estado atual do projeto
+## Mapa do projeto
 
-O projeto ainda não possui código executável.
+- `app/main.py` — aplicação FastAPI e rotas HTTP.
+- `app/config.py` — leitura e validação das variáveis de ambiente.
+- `app/database.py` — engine SQLAlchemy e verificação do banco.
+- `app/static/` — front HTML, CSS e JavaScript sem build.
+- `migrations/` — migrations Alembic versionadas.
+- `tests/` — testes automatizados com pytest.
+- `docs/andar-zero.md` — critérios técnicos anteriores às funcionalidades.
 
-Ainda não existem comandos comprovados de execução, teste ou migration. Esta seção será substituída depois que o andar zero estiver implementado e validado.
+## Comandos comprovados
 
+- Subir aplicação e PostgreSQL: `docker compose up --build`
+- Verificar a aplicação: abrir `http://localhost:8000`
+- Executar os testes: `pytest`
+- Aplicar migrations: `alembic upgrade head`
+- Criar migration: `alembic revision -m "descricao"`
+
+No Docker Compose, a aplicação aplica `alembic upgrade head` antes de iniciar o servidor.
+
+## Convenções
+
+- Python 3.13, FastAPI, SQLAlchemy 2, Alembic e pytest.
+- APIs REST com JSON.
+- Front servido pelo mesmo backend, sem etapa de build.
+- Acesso ao PostgreSQL somente pelo backend.
+- Toda mudança de schema precisa de migration; não edite o banco manualmente.
+- Testes não podem depender do banco de produção.
+- Nomes de arquivos, funções e variáveis em inglês; textos da interface e documentação em português.
+
+## Verificação antes do handoff
+
+- Execute `pytest`.
+- Suba o Compose quando a mudança afetar inicialização, banco ou migration.
+- Confira `GET /health` e a página inicial.
+- Revise o diff em busca de credenciais antes de qualquer commit.

@@ -1,6 +1,6 @@
 ---
 description: Procedimento para variáveis de ambiente e segredos
-globs: ["**/.env*", "app/config.py", "docker-compose.yml"]
+globs: ["**/.env*", "src/env.ts", "prisma.config.ts", "docker-compose.yml"]
 alwaysApply: false
 ---
 
@@ -16,8 +16,8 @@ Ao criar ou usar variável de ambiente ou código de configuração.
 
 1. Mantenha o valor real somente no ambiente local ignorado, no CI ou no painel da Vercel.
 2. Registre o nome em `.env.example` usando valor fictício.
-3. URLs com senha, `SESSION_SECRET`, tokens e chaves são secretos.
-4. Código enviado ao navegador não recebe credenciais do banco.
+3. URLs com senha, `DATABASE_URL`, `MIGRATION_DATABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, tokens e chaves são secretos.
+4. Somente variáveis com prefixo `NEXT_PUBLIC_` podem chegar ao navegador; `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` são públicas por design. Credenciais do banco e `service_role` nunca chegam ao cliente.
 5. Ao criar variável, informe onde ela precisa ser configurada manualmente.
 
 ## Verificação
@@ -28,5 +28,5 @@ Ao criar ou usar variável de ambiente ou código de configuração.
 
 - Não escreva segredo em resposta, commit, log ou comentário.
 - Não versione `.env`.
-- Não adicione chaves Supabase ao front: o ADR determina acesso ao banco pelo backend.
+- Não exponha `SUPABASE_SERVICE_ROLE_KEY`, URL do banco ou segredo de observabilidade em código de cliente.
 

@@ -7,7 +7,15 @@ Sistema web interno para controlar empréstimos de equipamentos.
 - `docs/prd.md` — define o problema, os usuários e as regras de negócio.
 - `stacks.md` — é a base detalhada da arquitetura aceita.
 - `docs/adr/` — registra decisões técnicas e seus motivos.
-- `rules/restrictions.md` — define os limites de atuação do agente.
+- `rules/` — contém os procedimentos de trabalho:
+  - `restrictions.md` — limites de autoridade, escopo e produção.
+  - `checks.md` — critérios para encerrar uma tarefa.
+  - `migration.md` — mudanças no schema via Prisma Migrate.
+  - `secrets.md` — variáveis de ambiente e segredos.
+  - `tests.md` — criação e alteração de testes.
+  - `handoff.md` — encerramento e continuidade de sessão.
+  - `spec-flow.md` — ciclo spec → plano → tarefas.
+  - `operacao.md` — contrato de commits, push e aprovações.
 - `docs/specs/` — contém spec, plano e tarefas de cada funcionalidade.
 
 ## Precedência
@@ -47,12 +55,14 @@ Se uma informação não estiver documentada, pergunte. Não invente uma decisã
 
 ## Comandos comprovados
 
-- Subir aplicação e PostgreSQL: `docker compose up --build`
+- Subir aplicação e PostgreSQL: `docker compose up --build -d`
 - Verificar a aplicação: abrir `http://localhost:3000`
-- Executar os testes: `npm test`
-- Aplicar migrations: `npm run db:deploy`
-- Criar migration: `npm run db:migrate -- --name descricao`
-- Gerar o Prisma Client: `npm run db:generate`
+- Executar os testes: `docker compose exec -T app npm test`
+- Executar lint: `docker compose exec -T app npm run lint`
+- Executar build: `docker compose exec -T app npm run build`
+- Aplicar migrations: `docker compose exec -T app npm run db:deploy`
+- Criar migration: `docker compose exec -T app npm run db:migrate -- --name descricao`
+- Gerar o Prisma Client: `docker compose exec -T app npm run db:generate`
 
 No Docker Compose, a aplicação aplica `prisma migrate deploy` e o seed antes de iniciar o servidor.
 
@@ -67,7 +77,7 @@ No Docker Compose, a aplicação aplica `prisma migrate deploy` e o seed antes d
 
 ## Verificação antes do handoff
 
-- Execute `npm test`, `npm run lint` e `npm run build`.
+- Execute os testes, lint e build pelos comandos documentados acima.
 - Suba o Compose quando a mudança afetar inicialização, banco ou migration.
 - Confira `GET /api/health`, o procedimento tRPC e a página inicial.
 - Revise o diff em busca de credenciais antes de qualquer commit.

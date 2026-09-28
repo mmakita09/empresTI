@@ -14,14 +14,19 @@ Ao iniciar qualquer funcionalidade nova do PRD.
 
 ## Procedimento
 
-1. Crie `docs/specs/<NNN-nome-curto>/spec.md`.
-2. Liste perguntas que o PRD não responde e espere as respostas.
-3. Escreva `plan.md` a partir da spec e cite os ADRs que o restringem.
+1. Crie `docs/specs/<NNN-nome-curto>/spec.md` com objetivo, vínculo com o PRD, regras, CAs identificados, fora de escopo e contrato afetado.
+2. Liste perguntas que o PRD não responde e espere as respostas antes de propor comportamento.
+3. Escreva `plan.md` a partir da spec e cite o ADR e as rules acionadas.
 4. Escreva `tasks.md` a partir do plano; cada tarefa cita um CA e cabe em um commit.
 5. Execute uma tarefa por vez e siga `rules/checks.md` ao concluir.
+
+## Verificação
+
+A pasta da spec contém `spec.md`, `plan.md` e `tasks.md`; cada tarefa aponta para um CA existente e não restam perguntas de negócio abertas dentro do escopo.
 
 ## Não faça
 
 - Não escreva código antes do plano aprovado.
 - Não crie pasta de spec fora do padrão `NNN-nome-curto`.
+- Não use a spec para decidir arquitetura já coberta por ADR.
 

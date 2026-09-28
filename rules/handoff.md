@@ -14,7 +14,7 @@ Ao terminar uma tarefa do plano, quando a sessão ficar longa ou quando o usuár
 
 ## Procedimento
 
-Sobrescreva `handoff.md` na raiz, com no máximo 25 linhas:
+Crie ou atualize `handoff.md` na raiz, com no máximo 25 linhas:
 
 1. tarefa e critério em andamento;
 2. branch e commits concluídos;
@@ -27,4 +27,10 @@ Sobrescreva `handoff.md` na raiz, com no máximo 25 linhas:
 ## Verificação
 
 Uma sessão nova continua lendo apenas `handoff.md`, a spec atual e os artefatos apontados por ela.
+
+## Não faça
+
+- Não registre valores de variáveis de ambiente, tokens, URLs com senha ou outros segredos.
+- Não use o handoff para mudar decisão de negócio ou ADR.
+- Não marque uma verificação como passada se ela não foi executada.
 

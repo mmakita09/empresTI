@@ -14,16 +14,17 @@ Antes de dizer “pronto”, “implementado” ou “funcionando”.
 
 ## Procedimento
 
-1. Rode `.venv/Scripts/python -m pytest`.
-2. Se a tarefa tocou em migration, recrie o ambiente com `docker compose down -v` e `docker compose up --build -d`.
-3. Confira `GET /health` e a página `/`.
-4. Rode `git status --short` e confirme que só aparecem arquivos do escopo.
-5. Faça uma busca por segredos antes do commit.
-6. Diga quais critérios AZ ou CA a tarefa atende.
+1. Rode `docker compose exec -T app npm test`.
+2. Rode `docker compose exec -T app npm run lint` e `docker compose exec -T app npm run build`.
+3. Se a tarefa tocou no schema, siga `rules/migration.md` e recrie o ambiente antes de afirmar que a migration funciona do zero.
+4. Confira `GET /api/health`, `GET /api/trpc/health.check` e a página `/`.
+5. Rode `git status --short` e confirme que só aparecem arquivos do escopo.
+6. Revise o diff procurando credenciais antes do commit.
+7. Diga quais critérios AZ ou CA a tarefa atende.
 
 ## Verificação
 
-Pronto significa testes passando, aplicação respondendo e diff limitado ao escopo.
+Os três comandos terminam sem erro, os endpoints respondem e o diff está limitado ao escopo.
 
 ## Não faça
 

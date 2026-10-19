@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const features = [
   { number: "01", title: "Consulte o catálogo", description: "Encontre os equipamentos internos e acompanhe a situação de cada item." },
   { number: "02", title: "Solicite um empréstimo", description: "Faça a solicitação de um item disponível em um único lugar." },
@@ -10,7 +12,7 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="#inicio" aria-label="EmpresTI, início"><span className="brand-mark" aria-hidden="true">E</span><span>EmpresTI</span></a>
         <nav aria-label="Navegação principal"><a href="#como-funciona">Como funciona</a><a href="#recursos">Recursos</a></nav>
-        <button className="login-button" type="button" disabled title="Login será disponibilizado em uma próxima tela">Entrar</button>
+        <Link className="login-button" href="/login">Entrar</Link>
       </header>
 
       <section className="hero" id="inicio" aria-labelledby="hero-title">

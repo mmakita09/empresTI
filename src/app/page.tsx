@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
 
 const features = [
   { number: "01", title: "Consulte o catálogo", description: "Encontre os equipamentos internos e acompanhe a situação de cada item." },
@@ -12,7 +13,7 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="#inicio" aria-label="EmpresTI, início"><span className="brand-mark" aria-hidden="true">E</span><span>EmpresTI</span></a>
         <nav aria-label="Navegação principal"><a href="#como-funciona">Como funciona</a><a href="#recursos">Recursos</a></nav>
-        <Link className="login-button" href="/login">Entrar</Link>
+        <div className="topbar-actions"><ThemeToggle /><Link className="login-button" href="/login">Entrar</Link></div>
       </header>
 
       <section className="hero" id="inicio" aria-labelledby="hero-title">

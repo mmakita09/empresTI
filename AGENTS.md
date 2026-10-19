@@ -43,6 +43,14 @@ Se uma informação não estiver documentada, pergunte. Não invente uma decisã
 - Configurações e segredos devem vir de variáveis de ambiente.
 - Não revele valores secretos em logs, documentação ou mensagens.
 
+## Skills
+
+- As skills do projeto ficam em `skills/<nome>/SKILL.md`.
+- No início de cada tarefa, leia apenas o frontmatter de cada skill. Carregue
+  o corpo da skill somente quando a tarefa corresponder à sua descrição.
+- `rules/`, `docs/adr/` e specs aprovadas têm precedência sobre qualquer skill.
+- Cada skill deve aparecer em um único caminho dentro do repositório.
+
 ## Mapa do projeto
 
 - `src/app/` — páginas e Route Handlers do Next.js.

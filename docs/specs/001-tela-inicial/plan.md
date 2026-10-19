@@ -6,6 +6,7 @@
 - `docs/adr/001-stack.md`
 - `rules/restrictions.md`
 - `rules/checks.md`
+- `skills/empres-ti-interface/SKILL.md`
 
 ## Plano
 
@@ -13,6 +14,9 @@
    tela inicial. Cobre CA-01 e CA-03.
 2. Definir o estilo responsivo e acessível da composição. Cobre CA-02.
 3. Executar testes, lint e build no ambiente Docker. Cobre CA-01 a CA-03.
+
+A composição e a revisão visual usam a skill `empres-ti-interface`; ela não
+cria requisitos nem altera regras de negócio.
 
 Não há perguntas de negócio abertas: a tela não executa nenhuma operação do
 PRD.

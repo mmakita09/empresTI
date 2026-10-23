@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HealthCard } from "./health-card";
 import { ThemeToggle } from "./theme-toggle";
 
 const features = [
@@ -41,7 +42,7 @@ export default function Home() {
       <section className="features" id="recursos" aria-label="Recursos previstos">
         {features.map((feature) => <article className="feature-card" key={feature.number}><span className="feature-number">{feature.number}</span><h3>{feature.title}</h3><p>{feature.description}</p></article>)}
       </section>
-      <footer><span>EmpresTI</span><span>Sistema interno de empréstimo de equipamentos</span></footer>
+      <footer><span>EmpresTI</span><HealthCard /><span>Sistema interno de empréstimo de equipamentos</span></footer>
     </main>
   );
 }

@@ -35,7 +35,7 @@ export function ThemeToggle() {
 
   return (
     <button className="theme-toggle" type="button" onClick={toggleTheme} aria-pressed={isDark}>
-      <span aria-hidden="true">{isDark ? "☀" : "◐"}</span>
+      <span className="theme-indicator" aria-hidden="true" />
       {isDark ? "Modo claro" : "Modo escuro"}
     </button>
   );

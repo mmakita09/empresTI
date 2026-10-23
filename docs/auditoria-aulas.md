@@ -1,6 +1,6 @@
 # Auditoria das aulas — EmpresTI
 
-Data: 23/10/2026. Base de comparação: `main`, commit `6fbd3d9`. Este relatório também registra as correções ainda não commitadas feitas durante a adequação.
+Data: 23/10/2026. Base de comparação: `main`, commit `6fbd3d9`. Correções registradas nos commits `6138529` e `5e529c0`.
 
 ## Resultado
 

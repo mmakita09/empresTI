@@ -1,4 +1,4 @@
-# Spec — Modo escuro
+# Spec 003 — Temas claro e escuro
 
 ## Objetivo
 
@@ -22,7 +22,11 @@ Esta melhoria visual apoia o uso do sistema interno sem alterar regras de empré
 
 ## Critérios de aceite
 
-- [x] A tela inicial e a tela de login exibem um controle de modo escuro.
-- [x] Ao ativar o controle, as cores das duas telas ficam legíveis no modo escuro.
-- [x] Ao navegar entre as telas, a preferência escolhida permanece no navegador.
-- [x] O controle pode ser usado por teclado e informa seu estado por acessibilidade.
+- CA-01: a tela inicial e a tela de login exibem um controle de tema.
+- CA-02: ao ativar o controle, as cores das duas telas ficam legíveis no modo escuro.
+- CA-03: ao navegar entre as telas, a preferência escolhida permanece no navegador.
+- CA-04: o controle pode ser usado por teclado e informa seu estado por acessibilidade.
+
+## Contrato afetado
+
+- Preferência local `empres-ti-theme` e classe de tema no elemento `html`.

@@ -12,8 +12,9 @@ metadata:
 ## Antes de começar
 
 1. Confirme que existe uma spec aprovada com critérios de aceitação para a tela.
-2. Leia `docs/adr/001-stack.md` e as rules aplicáveis. A skill não substitui
-   essas fontes e não define comportamento de negócio.
+2. Leia `docs/adr/001-stack.md`, `docs/adr/002-design-system.md` e as rules
+   aplicáveis. A skill não substitui essas fontes e não define comportamento
+   de negócio.
 
 ## Procedimento
 
@@ -23,11 +24,17 @@ metadata:
 3. Teste o layout em viewport amplo e estreito; preserve conteúdo e evite
    rolagem horizontal.
 4. Mantenha textos da interface em português e nomes de código em inglês.
+5. Reutilize os nomes semânticos de tokens do ADR-002; não copie valores de
+   cor nos componentes nem declare a paleta clara concluída enquanto ela
+   estiver marcada como não decidida.
+6. Em componentes Nocturne, use somente pesos 400 e 600, os raios da escala e
+   estados de foco com `--accent-500` no tema escuro.
 
 ## Verificação
 
 - Siga `rules/checks.md` para testes, lint, build e checagem da página.
 - Revise a página no navegador em desktop e celular antes do commit.
+- Confira os dois temas quando a página exibir o alternador.
 
 ## Não faça
 

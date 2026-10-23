@@ -14,11 +14,12 @@ Ao criar, alterar ou remover tabela, coluna, índice ou constraint.
 
 ## Procedimento
 
-1. Mostre o DDL ou a operação Prisma pretendida antes de executar uma mudança destrutiva.
-2. Crie uma migration versionada em `prisma/migrations/`; uma migration por tarefa.
-3. Explique o efeito sobre linhas existentes e como o downgrade funciona.
-4. Aplique do zero no PostgreSQL local com Docker Compose.
-5. Rode os testes depois da migration.
+1. Mostre o DDL ou a operação Prisma pretendida antes de criar qualquer migration e espere aprovação explícita.
+2. Para toda nova tabela de domínio, mostre também como `tenant_id`, RLS e policies serão tratados.
+3. Crie uma migration versionada em `prisma/migrations/`; uma migration por tarefa.
+4. Explique o efeito sobre linhas existentes e como o downgrade funciona.
+5. Aplique do zero no PostgreSQL local com Docker Compose.
+6. Rode os testes depois da migration, incluindo isolamento de tenant quando a policy mudar.
 
 ## Verificação
 

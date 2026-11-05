@@ -30,3 +30,10 @@ A pasta da spec contém `spec.md`, `plan.md` e `tasks.md`; cada tarefa aponta pa
 - Não crie pasta de spec fora do padrão `NNN-nome-curto`.
 - Não use a spec para decidir arquitetura já coberta por ADR.
 
+## Antes de declarar uma spec pronta
+
+- Delegue ao subagente verificador-spec (agents/verificador-spec.md),
+  passando o caminho da spec e o intervalo de commits.
+- A spec só é pronta com "Veredito: PRONTA". Qualquer outro resultado
+  volta para as tarefas — quem corrige é o agente principal, nunca o
+  verificador.

@@ -127,7 +127,7 @@ Nenhuma migration, credencial ou valor de variável remota foi alterado nesta au
 - `docker compose exec -T app npm run lint`: aprovado.
 - `docker compose exec -T app npm run build`: aprovado, incluindo TypeScript e geração das páginas.
 - HTTP local: `/`, `/login`, `/api/health` e `/api/trpc/health.check` responderam 200; os dois endpoints de saúde informaram conexão disponível.
-- Produção: `/`, `/login`, `/api/health` e `/api/trpc/health.check` responderam HTTP 200 após a retomada do Supabase e um novo deploy no Vercel; os endpoints de saúde informaram conexão disponível.
+- Produção na última conferência: `/` e `/login` responderam HTTP 200; `/api/health` respondeu 503 por indisponibilidade do banco remoto. Isso não impede a entrega da landing page, mas impede declarar o ambiente de banco saudável.
 - Reconferidos no código: ações de login/catálogo desabilitadas, schema contendo apenas `Tenant` e ausência de `docs/layout.md`. O `HealthCard` passou a ser usado na página inicial.
 - Migration e seed foram aplicados em um banco local temporário vazio; tenant e policy esperados foram encontrados e o banco temporário foi removido.
 - A revalidação incluiu banco vazio isolado, falha real de conexão, conexão de produção e inspeção visual desktop dos dois temas e da tela de login. Não incluiu viewport móvel controlado nem jornada autenticada.

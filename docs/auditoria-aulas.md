@@ -24,7 +24,7 @@ Foram revisados requisitos e checklists dos nove HTML que compõem a sequência 
 | 8 | `aula8-greenfield-ordem/aula8-greenfield-ordem.html` | Plano corretivo, teste HTTP, saúde visível, banco vazio e banco indisponível comprovados. |
 | 9 | `aula9-rules-operacao/aula9-rules-operacao.html` | Oito regras e migration corrigidas; primeira fatia vertical permanece bloqueada por decisões. |
 | 10 | `aula10-skills-mcp/aula10-skills-mcp.html` | Skill ligada ao ADR-002; ainda faltam prova de acionamento, página de componentes e decisão MCP. |
-| 11 | `aula11-subagentes/aula11-subagentes.html` | Harness de subagente e regra de verificação presentes localmente; ainda falta executar e registrar um veredito independente. |
+| 11 | `aula11-subagentes/aula11-subagentes.html` | Harness de subagente e regra de verificação presentes; verificador executado e Spec 004 marcada `NÃO PRONTA`. |
 
 Não existem aulas 3 e 5 na sequência do EmpresTI, conforme esclarecimento do usuário em 23/10/2026. Os arquivos que usam esses números pertencem a MLOps e ficam fora desta auditoria. Portanto, não há lacuna de material entre as aulas 2 e 4 nem entre 4 e 6. A cópia da aula 8 em `work/aula8.html` é idêntica; a aula 9 em Downloads apresenta diferenças de interface, sem mudança nos requisitos identificados. Páginas estáticas de outros projetos não foram tratadas como requisitos do EmpresTI.
 

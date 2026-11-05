@@ -12,7 +12,7 @@
 - Banco vazio isolado: migration e seed passaram; banco temporário removido depois da prova.
 - Banco indisponível isolado: `/api/health` respondeu 503; timeout de conexão definido em 3 segundos.
 - Produção revalidada em 05/11: `/` e `/login` responderam 200; `/api/health` respondeu 503 porque o banco remoto não está disponível no momento. Para o escopo atual de landing page, as rotas públicas continuam acessíveis.
-- Segurança: `next` e `eslint-config-next` foram atualizados para 16.4.3; `npm audit --omit=dev` não encontrou vulnerabilidades de produção. Essa atualização ainda precisa ser validada no Docker e enviada ao remoto.
+- Segurança: `next` e `eslint-config-next` foram atualizados para 16.4.3; `npm audit --omit=dev` não encontrou vulnerabilidades de produção. A atualização foi validada no Docker com testes, lint e build, e está no remoto.
 - Limites: login e catálogo desabilitados; primeira fatia está em spec 004 não aprovada.
 - A sequência EmpresTI não possui aulas 3/5; arquivos com esses números são de MLOps.
 - Falta docs/layout.md citado pelo ADR-002; paleta clara continua não decidida.

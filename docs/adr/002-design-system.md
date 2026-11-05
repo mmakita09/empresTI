@@ -1,8 +1,8 @@
 # ADR-002: Design system
 
-## Revisão aprovada em 23/10/2026
+## Revisão aprovada em 05/11/2026
 
-O usuário decidiu manter modo claro e modo escuro, com alternador e preferência local ao navegador. Esta revisão substitui as proibições de segundo tema do texto fornecido. Os valores visuais abaixo descrevem o tema escuro Nocturne; a tabela equivalente do tema claro ainda não foi decidida. O CSS claro existente não é automaticamente aprovado como design system.
+O usuário decidiu manter modo claro e modo escuro, com alternador e preferência local ao navegador. Esta revisão substitui as proibições de segundo tema do texto fornecido. Os valores visuais abaixo descrevem os dois temas usados na landing e no login.
 
 Este documento registra o design pretendido; não declara que a implementação atual já esteja conforme. `docs/layout.md`, citado na referência fornecida, não foi encontrado no projeto durante a auditoria.
 
@@ -22,7 +22,7 @@ Os arquivos `_ds/nocturne-<id>/styles.css` e `_ds_bundle.js` citados no layout n
 6. Open Sans é carregada pelo mecanismo de fonte do Next e servida com a aplicação, sem dependência de CDN em runtime.
 7. Phosphor Icons é o conjunto de ícones do projeto e deve ser instalado como dependência npm, sem CSS do unpkg em runtime.
 8. Os arquivos externos `_ds/nocturne-*` e `_ds_bundle.js` não são dependências da aplicação. Os tokens são mantidos no próprio repositório.
-9. O sistema oferece modo claro e modo escuro, com alternador acessível e preferência persistida localmente no navegador. O modo inicial permanece claro, conforme a spec 003; os tokens definitivos desse tema estão pendentes.
+9. O sistema oferece modo claro e modo escuro, com alternador acessível e preferência persistida localmente no navegador. O modo inicial permanece claro, conforme a spec 003.
 10. Componentes não contêm regra de negócio: recebem estado, conteúdo e disponibilidade por propriedades.
 11. A implementação inicial é destinada a desktop. Comportamento responsivo para celular e tablet não é decidido por este ADR.
 
@@ -48,7 +48,7 @@ O design system cobre:
 
 ## Tokens
 
-Os tokens desta seção são do tema escuro. Ambos os temas devem compartilhar os mesmos nomes semânticos, com valores próprios. Os valores finais do tema claro estão **não decididos**.
+Os dois temas compartilham os mesmos nomes semânticos, com valores próprios.
 
 ### Cores de base
 
@@ -118,6 +118,31 @@ Usar uma única elevação por elemento. Não empilhar sombras.
 | `--gradient-login` | `linear-gradient(160deg,#001449 0%,#00102F 60%,#080C1A 100%)` | Hero do login |
 | `--gradient-notice` | `linear-gradient(90deg,#0E1530,#0B1128)` | Aviso de regras |
 | `--gradient-equipment` | `radial-gradient(120% 120% at 20% 0%,#132663 0%,#0B1128 60%)` | Área de imagem do equipamento |
+
+### Paleta clara aprovada
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--page` | `#F7F8F7` | Fundo externo à aplicação |
+| `--color-bg` | `#F7F8F7` | Fundo da aplicação |
+| `--sidebar-bg` | `#FFFFFF` | Fundo da sidebar |
+| `--color-surface` | `#FFFFFF` | Cards, painéis e destaques |
+| `--surface-sunken` | `#F1F5F2` | Inputs e blocos internos |
+| `--color-text` | `#162921` | Texto principal |
+| `--text-muted` | `#5A6B62` | Descrições e texto secundário |
+| `--text-dim` | `#66776D` | Metadados |
+| `--text-faint` | `#87968E` | Placeholders e apoio |
+| `--border-frame` | `#CBD9D0` | Molduras e controles |
+| `--border-card` | `#DFE7E1` | Cards |
+| `--border-soft` | `#DFE5DF` | Divisores |
+| `--border-strong` | `#9FBBAA` | Formulários e botões |
+| `--accent-500` | `#2D8A5C` | Foco e ação |
+| `--accent-700` | `#1B6A48` | Links e bordas de ação |
+| `--accent-900` | `#001449` | Marca e painel profundo |
+
+Estados claros usam `#237450` para disponível, `#66776D` para emprestado,
+`#9A6C1E` para manutenção e `#A34047` para atraso. O gradiente de login é
+`linear-gradient(160deg,#DCEFE2 0%,#F7F8F7 70%)`.
 
 Nenhum outro gradiente faz parte do sistema.
 
@@ -447,7 +472,7 @@ Os arquivos Nocturne `_ds/nocturne-<id>/styles.css` e `_ds_bundle.js` citados no
 
 ## O que este ADR não decide
 
-- Valores definitivos da paleta do tema claro: não decidido.
+- A extensão do design system para telas de produto que ainda não existem.
 - Textos específicos de cada página.
 - Regras de autenticação, empréstimo ou autorização.
 - Se equipamentos em manutenção aparecem ou não no catálogo.

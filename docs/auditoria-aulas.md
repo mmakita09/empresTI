@@ -1,6 +1,6 @@
 # Auditoria das aulas — EmpresTI
 
-Data: 23/10/2026. Base de comparação: `main`, commit `6fbd3d9`. Correções registradas nos commits `6138529` e `5e529c0`.
+Data: 05/11/2026. Base de comparação: `main`; a revisão também considera as mudanças locais de processo ainda não commitadas.
 
 ## Resultado
 
@@ -10,7 +10,7 @@ Esta adequação corrige documentação, regras, testes, prova do andar zero e p
 
 ## Material disponível
 
-Foram revisados requisitos e checklists dos oito HTML que compõem a sequência de desenvolvimento/SDD. Também foram inspecionados os dois roteiros numerados 3 e 5 encontrados na mesma pasta para evitar misturar disciplinas:
+Foram revisados requisitos e checklists dos nove HTML que compõem a sequência disponível de desenvolvimento/SDD. Também foram inspecionados os dois roteiros numerados 3 e 5 encontrados na mesma pasta para evitar misturar disciplinas:
 
 | Aula | Arquivo | Situação principal |
 |---|---|---|
@@ -24,6 +24,7 @@ Foram revisados requisitos e checklists dos oito HTML que compõem a sequência 
 | 8 | `aula8-greenfield-ordem/aula8-greenfield-ordem.html` | Plano corretivo, teste HTTP, saúde visível, banco vazio e banco indisponível comprovados. |
 | 9 | `aula9-rules-operacao/aula9-rules-operacao.html` | Oito regras e migration corrigidas; primeira fatia vertical permanece bloqueada por decisões. |
 | 10 | `aula10-skills-mcp/aula10-skills-mcp.html` | Skill ligada ao ADR-002; ainda faltam prova de acionamento, página de componentes e decisão MCP. |
+| 11 | `aula11-subagentes/aula11-subagentes.html` | Harness de subagente e regra de verificação presentes localmente; ainda falta executar e registrar um veredito independente. |
 
 Não existem aulas 3 e 5 na sequência do EmpresTI, conforme esclarecimento do usuário em 23/10/2026. Os arquivos que usam esses números pertencem a MLOps e ficam fora desta auditoria. Portanto, não há lacuna de material entre as aulas 2 e 4 nem entre 4 e 6. A cópia da aula 8 em `work/aula8.html` é idêntica; a aula 9 em Downloads apresenta diferenças de interface, sem mudança nos requisitos identificados. Páginas estáticas de outros projetos não foram tratadas como requisitos do EmpresTI.
 
@@ -89,11 +90,25 @@ Os exercícios de qualidade de dados, recompensas e cupons das aulas anteriores 
 - Não foi identificada skill de terceiro que exigisse auditoria de origem nesta entrega.
 - Ausência de configuração MCP no repositório não é, isoladamente, reprovação: documentar a escolha CLI/MCP e, se MCP for usado, seus limites e evidências reais. Ter ferramentas disponíveis no aplicativo não comprova essa atividade.
 
+### 7. Subagentes: regra criada, evidência ainda ausente
+
+- `agents/verificador-spec.md` existe com frontmatter, escopo e resposta obrigatória.
+- `AGENTS.md` e `rules/spec-flow.md` apontam para o verificador antes de declarar uma spec pronta.
+- Não há no repositório um resultado `Veredito: PRONTA` produzido por uma execução independente. Portanto, a aula 11 está parcialmente preparada, não concluída.
+
+#### Verificação independente da Spec 004 — 05/11/2026
+
+O subagente `verificador-spec` conferiu os nove critérios de aceite da Spec
+004. Todos foram marcados como **REPROVADO** por ausência de implementação,
+sem alterações no repositório e sem execução contra banco de produção. O
+veredito foi **NÃO PRONTA**, coerente com o escopo atual da entrega, que não
+inclui o produto de empréstimos.
+
 ## Verificações da auditoria inicial
 
 | Verificação | Resultado | Limite da evidência |
 |---|---|---|
-| Retomar projeto Vercel | Projeto reativado; URL pública respondeu HTTP 200 e conteúdo da home | Não comprova autenticação ou banco remoto. |
+| Retomar publicação no Vercel | Projeto reativado; URL pública respondeu HTTP 200 e conteúdo da home | Não comprova autenticação ou banco remoto. |
 | `docker compose up --build -d` | Sucesso, incluindo build Next.js | Usou volume existente; não foi um teste de instalação limpa. |
 | `docker compose exec -T app npm test` | Inicialmente 1 teste; após adequação, 4 testes aprovados | Os testes de saúde simulam o service; não são integração com PostgreSQL. |
 | `docker compose exec -T app npm run lint` | Sucesso | Não valida fluxos de negócio. |
@@ -103,7 +118,7 @@ Os exercícios de qualidade de dados, recompensas e cupons das aulas anteriores 
 
 Produção: https://empres-ti.vercel.app
 
-Nenhuma migration, credencial ou configuração de banco remoto foi alterada nesta auditoria. Na etapa inicial, a mudança remota foi retomar o projeto Vercel, conforme solicitado.
+Nenhuma migration, credencial ou valor de variável remota foi alterado nesta auditoria. O projeto Supabase, que estava pausado, foi retomado e o deploy de produção foi refeito no Vercel para restabelecer as conexões.
 
 ### Revalidação após receber os novos arquivos
 
@@ -112,10 +127,10 @@ Nenhuma migration, credencial ou configuração de banco remoto foi alterada nes
 - `docker compose exec -T app npm run lint`: aprovado.
 - `docker compose exec -T app npm run build`: aprovado, incluindo TypeScript e geração das páginas.
 - HTTP local: `/`, `/login`, `/api/health` e `/api/trpc/health.check` responderam 200; os dois endpoints de saúde informaram conexão disponível.
-- URL pública do Vercel: HTTP 200 novamente. Não foi feita alteração de configuração ou novo deploy nesta revisão.
+- Produção: `/`, `/login`, `/api/health` e `/api/trpc/health.check` responderam HTTP 200 após a retomada do Supabase e um novo deploy no Vercel; os endpoints de saúde informaram conexão disponível.
 - Reconferidos no código: ações de login/catálogo desabilitadas, schema contendo apenas `Tenant` e ausência de `docs/layout.md`. O `HealthCard` passou a ser usado na página inicial.
 - Migration e seed foram aplicados em um banco local temporário vazio; tenant e policy esperados foram encontrados e o banco temporário foi removido.
-- A revalidação incluiu banco vazio isolado, falha real de conexão e inspeção visual desktop dos dois temas e da tela de login. Não incluiu viewport móvel controlado, jornada autenticada nem teste integrado de produção.
+- A revalidação incluiu banco vazio isolado, falha real de conexão, conexão de produção e inspeção visual desktop dos dois temas e da tela de login. Não incluiu viewport móvel controlado nem jornada autenticada.
 
 ## Ordem sugerida para adequação
 

@@ -3,9 +3,8 @@
 ## Estado atual
 
 As decisões do briefing foram incorporadas ao PRD e registradas nas Specs 005
-e 006. O modelo local de catálogo foi criado e a migration foi preparada, mas
-aguarda validação no ambiente Prisma/Docker. Não houve seed ou escrita no
-Supabase de produção nesta etapa.
+e 006. O modelo local de catálogo foi criado e a migration foi validada no
+Docker local. Não houve seed ou escrita no Supabase de produção nesta etapa.
 
 ## Conflitos e lacunas
 

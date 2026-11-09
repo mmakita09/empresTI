@@ -14,9 +14,9 @@ const equipment = [
   ["TI-0011", "Webcam", "webcam computer camera isolated"], ["TI-0012", "Câmera compacta", "compact digital camera isolated"],
 ];
 const apiKey = process.env.PIXABAY_API_KEY;
-if (!apiKey) throw new Error("Defina PIXABAY_API_KEY somente no ambiente de execução.");
 
 async function search(query) {
+  if (!apiKey) throw new Error("Defina PIXABAY_API_KEY somente no ambiente de execução.");
   const url = new URL("https://pixabay.com/api/");
   url.searchParams.set("key", apiKey); url.searchParams.set("q", query);
   url.searchParams.set("image_type", "photo"); url.searchParams.set("orientation", "horizontal");

@@ -4,7 +4,7 @@
 
 As decisões do briefing foram incorporadas ao PRD e registradas nas Specs 005
 e 006. O modelo local de catálogo foi criado e a migration foi validada no
-Docker local. Não houve seed ou escrita no Supabase de produção nesta etapa.
+Docker local. O seed idempotente dos 12 equipamentos foi executado no banco local do Docker; não houve escrita no Supabase de produção.
 
 ## Conflitos e lacunas
 
@@ -30,10 +30,9 @@ Docker local. Não houve seed ou escrita no Supabase de produção nesta etapa.
 800×600, unicidade, créditos, idempotência e impede upload automático em
 produção.
 
-O script `skills/imagens-equipamentos/scripts/prepare_manifest.mjs` já prepara
-candidatos e finaliza imagens aprovadas localmente. A execução real ainda
-depende de `PIXABAY_API_KEY` no ambiente local e de revisão humana dos
-candidatos.
+O script `skills/imagens-equipamentos/scripts/prepare_manifest.mjs` prepara
+candidatos e finaliza imagens aprovadas localmente. O manifesto foi revisado,
+as imagens foram processadas em 800×600 e o seed local foi executado.
 
 ## Verificação
 

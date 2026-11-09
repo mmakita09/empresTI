@@ -18,7 +18,7 @@ prática, cada um com patrimônio, nome, categoria, situação e imagem pública
   O resumo do briefing cita apenas TI-0004 e TI-0007 e diz “os outros 10”,
   portanto há uma divergência registrada, não ocultada; o seed segue a lista
   detalhada até correção formal do material.
-- CA-03: cada equipamento tem uma imagem Pexels única, sem pessoa, marca, logo,
+- CA-03: cada equipamento tem uma imagem Pixabay única, sem pessoa, marca, logo,
   texto ou tela legível, redimensionada para 800×600.
 - CA-04: cada imagem tem crédito de origem, fotógrafo e licença registrados.
 - CA-05: as imagens ficam em bucket público do Supabase Storage e podem ser
@@ -32,6 +32,6 @@ Catálogo visual, cadastro pela interface, importação da planilha e empréstim
 
 ## Dependências e bloqueios
 
-- chave Pexels em segredo, nunca em código ou git;
+- chave Pixabay em segredo, nunca em código ou git;
 - aprovação da migration e do processo de bootstrap da conta;
 - execução manual controlada do seed e upload no ambiente de produção.

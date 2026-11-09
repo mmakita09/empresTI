@@ -48,7 +48,7 @@ model Equipment {
 
 model ImageCredit {
   id            String   @id @default(uuid()) @db.Uuid
-  pexelsPhotoId String   @map("pexels_photo_id")
+  pixabayImageId String   @map("pixabay_image_id")
   sourceUrl     String   @map("source_url")
   photographer  String
   license       String
@@ -58,6 +58,6 @@ model ImageCredit {
 
   equipment Equipment?
 
-  @@unique([pexelsPhotoId])
+  @@unique([pixabayImageId])
   @@map("image_credits")
 }

@@ -14,10 +14,7 @@ Docker local. Não houve seed ou escrita no Supabase de produção nesta etapa.
   e a divergência permanece registrada na Spec 005.
 - O PRD ainda não decide criação de conta, devolução e avaria.
 - A conta de correção e o upload das imagens dependem de autorização para
-  produção e de uma chave Pexels fornecida como segredo, nunca no repositório.
-- No momento da execução, o Pexels informa que a emissão de novas chaves está
-  pausada. Sem uma chave já existente, o manifesto das imagens fica pendente;
-  não será usada outra fonte para contornar a regra da prática.
+  produção e de uma chave Pixabay fornecida como segredo, nunca no repositório.
 
 ## Decisões adotadas
 
@@ -29,7 +26,7 @@ Docker local. Não houve seed ou escrita no Supabase de produção nesta etapa.
 
 ## Skill
 
-`skills/imagens-equipamentos/SKILL.md` restringe a fonte ao Pexels, exige
+`skills/imagens-equipamentos/SKILL.md` restringe a fonte ao Pixabay, exige
 800×600, unicidade, créditos, idempotência e impede upload automático em
 produção.
 

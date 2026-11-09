@@ -1,6 +1,6 @@
 # PRD — Empréstimo de Equipamentos Internos
 
-**Versão:** 1  
+**Versão:** 2
 **Responsável:** time de Operações
 
 ## Problema
@@ -27,10 +27,12 @@ alguém lembrar de atualizar a linha correspondente.
 
 ## Regras já decididas por Operações
 
-- Cada pessoa pode estar com, no máximo, três itens ao mesmo tempo.
-- O prazo padrão de devolução é de 14 dias.
+- Cada pessoa pode estar com, no máximo, cinco itens em aberto ao mesmo tempo.
+- O prazo padrão de devolução é de 14 dias úteis.
 - Quem possui item em atraso não pode pegar outro item emprestado.
 - Equipamento em manutenção não aparece como disponível.
+- A solicitação cria o empréstimo imediatamente; não há fila de aprovação nesta
+  versão.
 
 ## Fora do escopo desta versão
 
@@ -49,8 +51,9 @@ O PRD não responde às questões abaixo. Elas precisam ser esclarecidas com o t
 de Operações antes da especificação das funcionalidades correspondentes:
 
 1. Quem pode criar uma conta e como o primeiro acesso é concedido?
-2. A solicitação reserva o equipamento imediatamente ou exige aprovação de
-   Operações?
-3. Quem pode registrar uma devolução: o colaborador, Operações ou ambos?
-4. Como devem ser calculados os 14 dias: dias corridos ou dias úteis?
-5. O que deve acontecer quando um equipamento devolvido apresenta avaria?
+2. Quem pode registrar uma devolução: o colaborador, Operações ou ambos?
+3. O que deve acontecer quando um equipamento devolvido apresenta avaria?
+
+As decisões sobre solicitação imediata, cinco itens e 14 dias úteis foram
+fechadas pelo briefing da prática de subagentes e passam a substituir a versão
+anterior deste PRD.

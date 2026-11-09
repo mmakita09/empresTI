@@ -6,12 +6,12 @@ const manifestPath = path.join(root, "prisma", "catalog-manifest.json");
 const candidatesPath = path.join(root, "prisma", "catalog-candidates.json");
 const imageDir = path.join(root, "prisma", "catalog-images");
 const equipment = [
-  ["TI-0001", "Notebook", "notebook computer"], ["TI-0002", "Notebook", "notebook computer"],
-  ["TI-0003", "Notebook", "notebook computer"], ["TI-0004", "Notebook", "notebook computer"],
-  ["TI-0005", "Monitor", "computer monitor"], ["TI-0006", "Monitor", "computer monitor"],
-  ["TI-0007", "Monitor", "computer monitor"], ["TI-0008", "Cabo", "computer cable"],
-  ["TI-0009", "Cabo", "computer cable"], ["TI-0010", "Cabo", "computer cable"],
-  ["TI-0011", "Webcam", "webcam"], ["TI-0012", "Câmera compacta", "compact camera"],
+  ["TI-0001", "Notebook", "laptop isolated white background"], ["TI-0002", "Notebook", "laptop isolated white background"],
+  ["TI-0003", "Notebook", "laptop isolated white background"], ["TI-0004", "Notebook", "laptop isolated white background"],
+  ["TI-0005", "Monitor", "computer monitor isolated white background"], ["TI-0006", "Monitor", "computer monitor isolated white background"],
+  ["TI-0007", "Monitor", "computer monitor isolated white background"], ["TI-0008", "Cabo", "ethernet cable isolated"],
+  ["TI-0009", "Cabo", "ethernet cable isolated"], ["TI-0010", "Cabo", "ethernet cable isolated"],
+  ["TI-0011", "Webcam", "webcam isolated white background"], ["TI-0012", "Câmera compacta", "compact digital camera isolated"],
 ];
 const apiKey = process.env.PIXABAY_API_KEY;
 if (!apiKey) throw new Error("Defina PIXABAY_API_KEY somente no ambiente de execução.");
@@ -22,7 +22,10 @@ async function search(query) {
   url.searchParams.set("image_type", "photo"); url.searchParams.set("orientation", "horizontal");
   url.searchParams.set("safesearch", "true"); url.searchParams.set("per_page", "20");
   const response = await fetch(url);
-  if (!response.ok) throw new Error(`Pixabay respondeu ${response.status}.`);
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(`Pixabay respondeu ${response.status} para a busca "${query}": ${detail.slice(0, 200)}`);
+  }
   return response.json();
 }
 

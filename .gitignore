@@ -15,3 +15,5 @@ __pycache__/
 .vercel/
 .txt
 *.zip
+prisma/catalog-candidates.json
+prisma/catalog-images/

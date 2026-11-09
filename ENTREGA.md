@@ -36,9 +36,11 @@ as imagens foram processadas em 800×600 e o seed local foi executado.
 
 ## Verificação
 
-O verificador de specs é independente, não edita nem publica. A Spec 004 teve
-veredito anterior de **NÃO PRONTA**. Ainda falta executar uma rodada comparável
-com erro plantado e registrar o resultado sem corrigir pelo verificador.
+O verificador de specs é independente, não edita nem publica. A rodada final
+foi executada com erro plantado controlado e confirmou o veredito **NÃO PRONTA**
+para a Spec 004: os CA-01 a CA-05 e CA-07 a CA-09 não têm implementação; CA-06
+tem conflito entre o limite de três itens da spec e cinco itens do PRD v2.
+Também faltam `plan.md` e `tasks.md` aprovados para a Spec 004.
 
 ## Fora desta entrega
 

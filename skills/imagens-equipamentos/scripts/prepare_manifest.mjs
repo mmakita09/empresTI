@@ -6,12 +6,12 @@ const manifestPath = path.join(root, "prisma", "catalog-manifest.json");
 const candidatesPath = path.join(root, "prisma", "catalog-candidates.json");
 const imageDir = path.join(root, "prisma", "catalog-images");
 const equipment = [
-  ["TI-0001", "Notebook", "laptop isolated white background"], ["TI-0002", "Notebook", "laptop isolated white background"],
-  ["TI-0003", "Notebook", "laptop isolated white background"], ["TI-0004", "Notebook", "laptop isolated white background"],
-  ["TI-0005", "Monitor", "computer monitor isolated white background"], ["TI-0006", "Monitor", "computer monitor isolated white background"],
-  ["TI-0007", "Monitor", "computer monitor isolated white background"], ["TI-0008", "Cabo", "ethernet cable isolated"],
+  ["TI-0001", "Notebook", "laptop closed isolated"], ["TI-0002", "Notebook", "laptop closed isolated"],
+  ["TI-0003", "Notebook", "laptop closed isolated"], ["TI-0004", "Notebook", "laptop closed isolated"],
+  ["TI-0005", "Monitor", "lcd monitor isolated"], ["TI-0006", "Monitor", "lcd monitor isolated"],
+  ["TI-0007", "Monitor", "lcd monitor isolated"], ["TI-0008", "Cabo", "ethernet cable isolated"],
   ["TI-0009", "Cabo", "ethernet cable isolated"], ["TI-0010", "Cabo", "ethernet cable isolated"],
-  ["TI-0011", "Webcam", "webcam isolated white background"], ["TI-0012", "Câmera compacta", "compact digital camera isolated"],
+  ["TI-0011", "Webcam", "webcam computer camera isolated"], ["TI-0012", "Câmera compacta", "compact digital camera isolated"],
 ];
 const apiKey = process.env.PIXABAY_API_KEY;
 if (!apiKey) throw new Error("Defina PIXABAY_API_KEY somente no ambiente de execução.");

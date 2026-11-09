@@ -30,6 +30,11 @@ Docker local. Não houve seed ou escrita no Supabase de produção nesta etapa.
 800×600, unicidade, créditos, idempotência e impede upload automático em
 produção.
 
+O script `skills/imagens-equipamentos/scripts/prepare_manifest.mjs` já prepara
+candidatos e finaliza imagens aprovadas localmente. A execução real ainda
+depende de `PIXABAY_API_KEY` no ambiente local e de revisão humana dos
+candidatos.
+
 ## Verificação
 
 O verificador de specs é independente, não edita nem publica. A Spec 004 teve

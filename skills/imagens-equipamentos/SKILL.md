@@ -39,3 +39,10 @@ bucket do projeto antes de vinculá-lo ao catálogo.
 O manifesto deve relacionar patrimônio, `image_id`, URL de origem, fotógrafo,
 licença e dimensões finais. Se uma foto não satisfizer todas as regras, rejeite
 o item e deixe a lacuna explícita; não invente uma imagem ou um crédito.
+
+## Script de apoio
+
+`scripts/prepare_manifest.mjs --collect` consulta o Pixabay e salva candidatos
+para revisão humana. Depois de marcar uma única opção aprovada por patrimônio,
+`--finalize` baixa, redimensiona para 800×600 e grava o manifesto. O script
+continua sem fazer upload ou seed remoto.

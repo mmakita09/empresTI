@@ -15,5 +15,49 @@ model Tenant {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
+  equipments Equipment[]
+
   @@map("tenants")
+}
+
+enum EquipmentSituation {
+  AVAILABLE
+  MAINTENANCE
+  BORROWED
+}
+
+model Equipment {
+  id            String             @id @default(uuid()) @db.Uuid
+  tenantId      String             @map("tenant_id") @db.Uuid
+  patrimony     String
+  name          String
+  category      String
+  situation     EquipmentSituation @default(AVAILABLE)
+  imageUrl      String             @map("image_url")
+  imageCreditId String             @unique @map("image_credit_id") @db.Uuid
+  createdAt     DateTime           @default(now()) @map("created_at")
+  updatedAt     DateTime           @updatedAt @map("updated_at")
+
+  tenant      Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  imageCredit ImageCredit @relation(fields: [imageCreditId], references: [id], onDelete: Restrict)
+
+  @@unique([tenantId, patrimony])
+  @@index([tenantId, situation])
+  @@map("equipments")
+}
+
+model ImageCredit {
+  id            String   @id @default(uuid()) @db.Uuid
+  pexelsPhotoId String   @map("pexels_photo_id")
+  sourceUrl     String   @map("source_url")
+  photographer  String
+  license       String
+  width         Int
+  height        Int
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  equipment Equipment?
+
+  @@unique([pexelsPhotoId])
+  @@map("image_credits")
 }

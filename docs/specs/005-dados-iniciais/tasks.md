@@ -1,7 +1,7 @@
 # Tarefas — Spec 005
 
-- [ ] Especificar modelo `Equipment` e `ImageCredit`.
-- [ ] Criar migration aprovada.
+- [x] Especificar modelo `Equipment` e `ImageCredit`.
+- [ ] Criar migration aprovada (migration criada; validação depende do ambiente Prisma/Docker).
 - [ ] Criar skill `imagens-equipamentos` e referências do contrato Pexels.
 - [ ] Implementar processamento local 800×600 com rejeição de duplicatas.
 - [ ] Implementar seed idempotente dos 12 equipamentos.

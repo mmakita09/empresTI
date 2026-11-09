@@ -17,3 +17,4 @@ __pycache__/
 *.zip
 prisma/catalog-candidates.json
 prisma/catalog-images/
+prisma/review-images/

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { trpc } from "@/trpc/client";
+import { LogoutButton } from "@/app/logout-button";
 
 export default function CatalogPage() {
   const catalog = trpc.catalog.list.useQuery();
@@ -13,7 +14,7 @@ export default function CatalogPage() {
   if (!catalog.data?.tenantId) return <main className="catalog-shell"><h1>Conta sem tenant</h1><p>Peça ao administrador para vincular sua conta ao tenant.</p></main>;
 
   return <main className="catalog-shell">
-    <header className="catalog-header"><div><p className="section-label">CATÁLOGO</p><h1>Equipamentos disponíveis</h1></div><Link className="login-button" href="/">Sair</Link></header>
+    <header className="catalog-header"><div><p className="section-label">CATÁLOGO</p><h1>Equipamentos disponíveis</h1></div><LogoutButton /></header>
     <p className="catalog-status">{loans.data?.length ?? 0} empréstimo(s) em aberto.</p>
     <section className="catalog-grid" aria-label="Equipamentos">
       {catalog.data.equipment.map((item) => <article className="catalog-card" key={item.id}>

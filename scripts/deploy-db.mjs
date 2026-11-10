@@ -4,10 +4,8 @@ const databaseUrl = process.env.DATABASE_URL;
 if (!databaseUrl) throw new Error("DATABASE_URL ausente para aplicar as migrations.");
 
 const migrationUrl = new URL(databaseUrl);
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-if (supabaseUrl && migrationUrl.hostname.endsWith("pooler.supabase.com")) {
-  const projectRef = new URL(supabaseUrl).hostname.split(".")[0];
-  migrationUrl.hostname = `db.${projectRef}.supabase.co`;
+if (migrationUrl.hostname.endsWith("pooler.supabase.com")) {
+  // O pooler em 6543 é transacional; o modo sessão em 5432 aceita o Prisma Migrate.
   migrationUrl.port = "5432";
   migrationUrl.searchParams.delete("pgbouncer");
 }

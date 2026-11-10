@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Decisões fechadas; migration ainda não aprovada.** Este documento reúne o menor fluxo que liga banco, servidor e interface. O código desta funcionalidade só pode começar depois da aprovação do DDL, da migration e do plano de execução.
+**Decisões e migration local fechadas; código de produto pendente.** Este documento reúne o menor fluxo que liga banco, servidor e interface. A migration foi validada no PostgreSQL local; o código da funcionalidade ainda precisa ser implementado e verificado.
 
 ## Objetivo
 
@@ -59,4 +59,4 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 
 ## Pendência de execução
 
-- Aprovar o DDL/schema proposto e a migration antes de alterar `prisma/schema.prisma` ou criar migration.
+- Implementar servidor, autorização, interface e testes de todos os critérios de aceitação.

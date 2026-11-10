@@ -16,6 +16,9 @@ model Tenant {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   equipments Equipment[]
+  memberships Membership[]
+  loans       Loan[]
+  auditEvents AuditEvent[]
 
   @@map("tenants")
 }
@@ -24,6 +27,17 @@ enum EquipmentSituation {
   AVAILABLE
   MAINTENANCE
   BORROWED
+}
+
+enum MembershipRole {
+  ADMIN
+  OPERATIONS
+  COLLABORATOR
+}
+
+enum LoanStatus {
+  ACTIVE
+  RETURNED
 }
 
 model Equipment {
@@ -40,10 +54,75 @@ model Equipment {
 
   tenant      Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
   imageCredit ImageCredit @relation(fields: [imageCreditId], references: [id], onDelete: Restrict)
+  loans       Loan[]
 
   @@unique([tenantId, patrimony])
   @@index([tenantId, situation])
   @@map("equipments")
+}
+
+model Membership {
+  id         String         @id @default(uuid()) @db.Uuid
+  tenantId   String         @map("tenant_id") @db.Uuid
+  authUserId String         @map("auth_user_id") @db.Uuid
+  role       MembershipRole @default(COLLABORATOR)
+  createdAt  DateTime       @default(now()) @map("created_at")
+  updatedAt  DateTime       @updatedAt @map("updated_at")
+
+  tenant       Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  loans        Loan[]       @relation("BorrowerLoans")
+  returnedLoans Loan[]      @relation("ReturnedByLoans")
+  auditEvents  AuditEvent[]
+
+  @@unique([tenantId, authUserId])
+  @@index([authUserId])
+  @@map("memberships")
+}
+
+model Loan {
+  id                 String     @id @default(uuid()) @db.Uuid
+  tenantId           String     @map("tenant_id") @db.Uuid
+  equipmentId        String     @map("equipment_id") @db.Uuid
+  borrowerMembershipId String   @map("borrower_membership_id") @db.Uuid
+  returnedByMembershipId String? @map("returned_by_membership_id") @db.Uuid
+  status             LoanStatus @default(ACTIVE)
+  requestedAt        DateTime   @default(now()) @map("requested_at")
+  dueAt              DateTime   @map("due_at")
+  returnedAt         DateTime?  @map("returned_at")
+  damageReported     Boolean    @default(false) @map("damage_reported")
+  createdAt          DateTime   @default(now()) @map("created_at")
+  updatedAt          DateTime   @updatedAt @map("updated_at")
+
+  tenant        Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  equipment     Equipment   @relation(fields: [equipmentId], references: [id], onDelete: Restrict)
+  borrower      Membership  @relation("BorrowerLoans", fields: [borrowerMembershipId], references: [id], onDelete: Restrict)
+  returnedBy    Membership? @relation("ReturnedByLoans", fields: [returnedByMembershipId], references: [id], onDelete: Restrict)
+  auditEvents   AuditEvent[]
+
+  @@index([tenantId, status])
+  @@index([equipmentId, status])
+  @@index([borrowerMembershipId, status])
+  @@map("loans")
+}
+
+model AuditEvent {
+  id           String       @id @default(uuid()) @db.Uuid
+  tenantId     String       @map("tenant_id") @db.Uuid
+  actorMembershipId String?  @map("actor_membership_id") @db.Uuid
+  loanId       String?      @map("loan_id") @db.Uuid
+  action       String
+  entityType   String       @map("entity_type")
+  entityId     String       @map("entity_id") @db.Uuid
+  metadata     Json?
+  createdAt    DateTime     @default(now()) @map("created_at")
+
+  tenant Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  actor  Membership? @relation(fields: [actorMembershipId], references: [id], onDelete: SetNull)
+  loan   Loan?       @relation(fields: [loanId], references: [id], onDelete: SetNull)
+
+  @@index([tenantId, createdAt])
+  @@index([entityType, entityId])
+  @@map("audit_events")
 }
 
 model ImageCredit {

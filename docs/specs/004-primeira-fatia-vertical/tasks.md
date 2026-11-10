@@ -1,8 +1,8 @@
 # Tarefas — Spec 004
 
-- [ ] Aprovar DDL, schema proposto e tratamento de RLS/policies.
-- [ ] Criar migration versionada após aprovação.
-- [ ] Aplicar migration do zero no PostgreSQL local.
+- [x] Aprovar DDL, schema proposto e tratamento de RLS/policies.
+- [x] Criar migration versionada após aprovação.
+- [x] Aplicar migration do zero no PostgreSQL local.
 - [ ] Implementar sessão Supabase e proteção das rotas.
 - [ ] Implementar isolamento por `tenant_id` e autorização no servidor.
 - [ ] Implementar catálogo e solicitação imediata.

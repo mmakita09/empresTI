@@ -40,8 +40,19 @@ as imagens foram processadas em 800×600 e o seed local foi executado.
 O verificador de specs é independente, não edita nem publica. A rodada mais
 recente confirmou o veredito **NÃO PRONTA** para a Spec 004: os CA-01 a CA-09
 ainda não têm implementação nem testes de produto. `plan.md` e `tasks.md` já
-existem; a migration continua aguardando aprovação do DDL. Os checks Docker
-não puderam ser repetidos nesta rodada porque o daemon estava indisponível.
+existem; a migration foi aprovada e validada localmente. Os checks Docker
+foram repetidos após o daemon voltar e passaram; o veredito continua `NÃO
+PRONTA` porque o código de produto ainda não foi implementado.
+
+### Atualização após autorização do DDL
+
+- O schema da Spec 004 foi implementado no Prisma com `memberships`, `loans` e
+  `audit_events`.
+- A migration `20261110180448_first_vertical_slice` foi aplicada do zero no
+  PostgreSQL local.
+- RLS foi habilitado nas três tabelas novas e o índice único de empréstimo ativo
+  foi validado no banco local.
+- O Supabase remoto não foi alterado.
 
 ## Fora desta entrega
 

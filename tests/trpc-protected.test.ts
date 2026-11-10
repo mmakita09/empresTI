@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const mocks = vi.hoisted(() => ({ membershipFindFirst: vi.fn(), equipmentFindMany: vi.fn(), createLoan: vi.fn(), returnLoan: vi.fn() }));
+const mocks = vi.hoisted(() => ({ membershipFindFirst: vi.fn(), equipmentFindMany: vi.fn(), loanFindMany: vi.fn(), createLoan: vi.fn(), returnLoan: vi.fn() }));
 
 vi.mock("@/server/db", () => ({
   prisma: {
     membership: { findFirst: mocks.membershipFindFirst },
     equipment: { findMany: mocks.equipmentFindMany },
-    loan: { findMany: vi.fn(), findFirst: vi.fn() },
+    loan: { findMany: mocks.loanFindMany, findFirst: vi.fn() },
   },
 }));
 vi.mock("@/server/services/loan-service", () => ({ createLoan: mocks.createLoan, returnLoan: mocks.returnLoan }));
@@ -40,5 +40,19 @@ describe("procedures protegidas", () => {
     const caller = appRouter.createCaller({ requestId: "test", userId });
     await caller.loans.create({ tenantId, equipmentId });
     expect(mocks.createLoan).toHaveBeenCalledWith({ tenantId, equipmentId, borrowerMembershipId: membershipId });
+  });
+
+  it("CA-04 preserva a situação de manutenção no catálogo", async () => {
+    mocks.membershipFindFirst.mockResolvedValue({ id: membershipId, tenantId, authUserId: userId, role: "COLLABORATOR" });
+    mocks.equipmentFindMany.mockResolvedValue([{ id: equipmentId, patrimony: "TI-0001", name: "Notebook", category: "Notebook", situation: "MAINTENANCE", imageUrl: "https://example.test/image.jpg" }]);
+    const caller = appRouter.createCaller({ requestId: "test", userId });
+    const result = await caller.catalog.list();
+    expect(result.equipment[0]?.situation).toBe("MAINTENANCE");
+  });
+
+  it("CA-07 bloqueia Operações para colaborador", async () => {
+    mocks.membershipFindFirst.mockResolvedValue({ id: membershipId, tenantId, authUserId: userId, role: "COLLABORATOR" });
+    const caller = appRouter.createCaller({ requestId: "test", userId });
+    await expect(caller.operations.openLoans({ tenantId })).rejects.toMatchObject({ code: "FORBIDDEN" });
   });
 });

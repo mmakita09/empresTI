@@ -8,7 +8,7 @@ Este arquivo não é uma migration. Ele apresenta a mudança antes da execução
 - `equipment`: inventário do tenant, com patrimônio único, categoria e estado.
 - `loans`: empréstimos, prazo, devolução e responsáveis.
 - `audit_events`: registro append-only de ações relevantes.
-- `loan_requests`: só será incluída se a solicitação exigir aprovação.
+- Não há `loan_requests`: a decisão registrada na Spec 006 é criar o empréstimo imediatamente.
 
 Todas as tabelas de domínio recebem `tenant_id`. As chaves estrangeiras compostas incluem o tenant para impedir referências cruzadas. Índices filtrados impedem mais de um empréstimo ativo para o mesmo equipamento. Limite de itens, atraso e cálculo de prazo ficam no service dentro de transação, porque dependem de múltiplas linhas.
 
@@ -22,7 +22,6 @@ A migration apenas adicionará tabelas e tipos; não altera a tabela `tenants` n
 
 ## Pontos ainda não fechados
 
-- A tabela `loan_requests` depende da decisão de aprovação.
-- O cálculo e armazenamento de `due_at` dependem de dias corridos ou úteis.
+- `due_at` será calculado como 14 dias úteis, conforme a decisão registrada no PRD e na Spec 006.
 - Os estados de equipamento dependem do tratamento de avaria.
 - O vínculo inicial de administrador depende do processo de bootstrap.

@@ -141,3 +141,15 @@ Nenhuma migration, credencial ou valor de variável remota foi alterado nesta au
 5. Demonstrar carregamento da skill/regras e registrar a decisão sobre MCP; completar o pipeline e os controles do stack antes de afirmar prontidão de produção.
 
 Cada item exige sua verificação. Não marcar a lista inteira como concluída por um build verde ou por a URL abrir.
+
+## Atualização de pendências — 11/11/2026
+
+- `docs/layout.md` já está versionado e descreve a landing page e o login.
+- Open Sans passou a ser empacotada pelo `next/font` e `@phosphor-icons/web`
+  foi adicionado ao lockfile.
+- Build Docker, testes e lint foram executados após essa atualização.
+- A Spec 004 foi reconciliada com decisões já registradas no PRD e na Spec 006:
+  solicitação imediata, prazo de 14 dias úteis e limite de cinco empréstimos.
+- Permanecem bloqueios reais somente para o tratamento de avaria e o bootstrap
+  do primeiro administrador. A primeira fatia vertical continua sem aprovação e
+  não foi implementada.

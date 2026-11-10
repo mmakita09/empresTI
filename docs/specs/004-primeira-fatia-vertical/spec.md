@@ -1,8 +1,8 @@
-# Spec 004 — Primeira fatia vertical do produto (rascunho)
+# Spec 004 — Primeira fatia vertical do produto (aguarda duas decisões)
 
 ## Estado
 
-**Não aprovada.** Este documento reúne o menor fluxo que liga banco, servidor e interface. O código desta funcionalidade não pode começar enquanto as perguntas ao final estiverem abertas e a migration proposta não for aprovada.
+**Não aprovada.** Este documento reúne o menor fluxo que liga banco, servidor e interface. O código desta funcionalidade não pode começar enquanto as duas perguntas ao final estiverem abertas e a migration proposta não for aprovada.
 
 ## Objetivo
 
@@ -24,11 +24,12 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 - Router tRPC → service → Prisma; autorização no servidor.
 - Equipamento em manutenção não aparece como disponível.
 - Colaborador e Operações registram devoluções, conforme a descrição de usuários do PRD.
+- A solicitação cria o empréstimo imediatamente, sem aprovação, conforme o PRD e a Spec 006.
+- O prazo padrão é de 14 dias úteis, conforme o PRD e a Spec 006.
+- O limite adotado para empréstimos em aberto é de cinco itens, conforme o PRD v2 e a Spec 006.
 
 ## Regras que dependem de resposta
 
-- Se solicitar já cria um empréstimo ou cria um pedido aguardando aprovação.
-- Se o prazo de 14 dias usa dias corridos ou úteis.
 - Estado atribuído ao equipamento devolvido com avaria.
 - Como nasce o primeiro administrador antes de ele poder convidar outras pessoas.
 
@@ -39,7 +40,7 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 - CA-03: pessoa autenticada só acessa dados do tenant ao qual pertence.
 - CA-04: catálogo mostra equipamentos e situação, sem anunciar manutenção como disponível.
 - CA-05: operação concorrente não permite dois empréstimos ativos do mesmo equipamento.
-- CA-06: pessoa com três itens ativos ou item atrasado não consegue iniciar outro empréstimo.
+- CA-06: pessoa com cinco itens ativos ou item atrasado não consegue iniciar outro empréstimo.
 - CA-07: Operações vê todos os empréstimos abertos do tenant; colaborador vê somente os próprios.
 - CA-08: devolução registra pessoa e horário e atualiza a disponibilidade conforme a resposta sobre avaria.
 - CA-09: cada mudança relevante gera registro append-only de auditoria.
@@ -61,7 +62,5 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 
 ## Perguntas que bloqueiam plano, tarefas e código
 
-1. A solicitação vira empréstimo imediatamente ou aguarda aprovação de Operações?
-2. Os 14 dias são corridos ou úteis?
-3. Item devolvido com avaria vai direto para manutenção ou aguarda avaliação em outro estado?
-4. O primeiro administrador será criado manualmente no Supabase e vinculado por seed/configuração controlada, ou existe outro processo?
+1. Item devolvido com avaria vai direto para manutenção ou aguarda avaliação em outro estado?
+2. O primeiro administrador será criado manualmente no Supabase e vinculado por seed/configuração controlada, ou existe outro processo?

@@ -9,5 +9,5 @@
 - [x] Implementar prazo de 14 dias úteis e limite de cinco empréstimos.
 - [x] Implementar devolução com avaria encaminhada para `MANUTENÇÃO`.
 - [x] Registrar auditoria append-only.
-- [ ] Criar e vincular o primeiro administrador por configuração controlada.
-- [ ] Executar os critérios de aceitação e registrar as evidências no Docker e com uma conta real do Supabase.
+- [x] Criar e vincular o primeiro administrador por configuração controlada.
+- [x] Executar os critérios de aceitação e registrar as evidências no Docker e com uma conta real do Supabase.

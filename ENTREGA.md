@@ -37,11 +37,9 @@ as imagens foram processadas em 800×600 e o seed local foi executado.
 
 ## Verificação
 
-O verificador de specs é independente, não edita nem publica. A rodada atual
-confirmou implementação dos critérios CA-02 a CA-09, com 19 testes passando no
-Docker. CA-01 ainda depende de comprovação com uma sessão real do Supabase e
-o deploy de produção; portanto o veredito permanece **NÃO PRONTA** até essa
-jornada ser observada.
+O verificador de specs é independente, não edita nem publica. A rodada final
+confirmou os critérios CA-01 a CA-09: 19 testes passando no Docker e jornada
+real validada no Supabase/Vercel. O veredito final da Spec 004 é **PRONTA**.
 
 ### Atualização após autorização do DDL
 
@@ -51,7 +49,8 @@ jornada ser observada.
   PostgreSQL local.
 - RLS foi habilitado nas três tabelas novas e o índice único de empréstimo ativo
   foi validado no banco local.
-- O Supabase remoto não foi alterado.
+- O Supabase remoto recebeu as migrations Prisma e o seed idempotente durante
+  o deploy de produção.
 
 ### Implementação da primeira fatia
 
@@ -65,17 +64,16 @@ jornada ser observada.
 - Validação Docker mais recente: build aprovado, 19 testes em 7 arquivos e
   lint sem erros; há apenas o aviso padrão de otimização de `<img>`.
 - A variável controlada do primeiro administrador foi cadastrada no Vercel em
-  Production. O redeploy ainda exige a verificação de identidade da conta.
-- A conta Auth e as variáveis públicas do Supabase foram configuradas, mas a
-  jornada real ainda retorna erro porque o banco remoto não recebeu as
-  migrations Prisma. A aplicação confirma conexão, porém as tabelas de
-  domínio ainda não existem no schema remoto.
+  Production e criou a membership ADMIN na primeira sessão real.
+- A conta Auth e as variáveis públicas do Supabase foram configuradas. A
+  sessão real carregou o catálogo com 12 equipamentos e as rotas de
+  devoluções e Operações responderam autenticadas.
 
 ## Fora desta entrega
 
-Não foram executadas migration remota, seed remoto, bucket público ou upload
-de fotos. A validação da sessão real e do redeploy depende da autenticação do
-proprietário no Vercel/Supabase.
+Não foram criados bucket público ou upload de fotos. A migration remota e o
+seed foram executados pelo build controlado; as imagens continuam no manifesto
+idempotente do projeto.
 
 ## Links
 

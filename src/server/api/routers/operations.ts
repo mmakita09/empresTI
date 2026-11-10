@@ -10,6 +10,7 @@ async function operationsMembership(userId: string, tenantId: string) {
 }
 
 export const operationsRouter = createTRPCRouter({
+  me: protectedProcedure.query(async ({ ctx }) => prisma.membership.findFirst({ where: { authUserId: ctx.userId }, select: { tenantId: true, role: true } })),
   openLoans: protectedProcedure.input(z.object({ tenantId: z.string().uuid() })).query(async ({ ctx, input }) => {
     await operationsMembership(ctx.userId, input.tenantId);
     return prisma.loan.findMany({ where: { tenantId: input.tenantId, status: "ACTIVE" }, orderBy: { dueAt: "asc" }, include: { equipment: { select: { patrimony: true, name: true } }, borrower: { select: { authUserId: true, role: true } } } });

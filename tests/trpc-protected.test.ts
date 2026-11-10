@@ -13,10 +13,10 @@ vi.mock("@/server/services/loan-service", () => ({ createLoan: mocks.createLoan,
 
 import { appRouter } from "@/server/api/root";
 
-const tenantId = "00000000-0000-0000-0000-000000000001";
-const userId = "00000000-0000-0000-0000-000000000002";
-const equipmentId = "00000000-0000-0000-0000-000000000003";
-const membershipId = "00000000-0000-0000-0000-000000000004";
+const tenantId = "11111111-1111-4111-8111-111111111111";
+const userId = "22222222-2222-4222-8222-222222222222";
+const equipmentId = "33333333-3333-4333-8333-333333333333";
+const membershipId = "44444444-4444-4444-8444-444444444444";
 
 describe("procedures protegidas", () => {
   beforeEach(() => vi.clearAllMocks());

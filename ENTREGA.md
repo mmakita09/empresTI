@@ -4,7 +4,8 @@
 
 As decisões do briefing foram incorporadas ao PRD e registradas nas Specs 005
 e 006. O modelo local de catálogo foi criado e a migration foi validada no
-Docker local. O seed idempotente dos 12 equipamentos foi executado no banco local do Docker; não houve escrita no Supabase de produção.
+Docker local. O seed idempotente dos 12 equipamentos foi validado no banco
+local e também executado no Supabase remoto pelo build controlado.
 
 ## Conflitos e lacunas
 

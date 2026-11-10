@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ThemeToggle } from "../theme-toggle";
+import { LoginForm } from "./login-form";
 
 export default function LoginPage() {
   return (
@@ -19,16 +20,7 @@ export default function LoginPage() {
           <p>Consulte solicitações, empréstimos e devoluções em um só lugar.</p>
         </div>
 
-        <form className="login-form" aria-describedby="login-note">
-          <label htmlFor="email">E-mail corporativo</label>
-          <input id="email" name="email" type="email" autoComplete="email" placeholder="nome@empresa.com" />
-
-          <label htmlFor="password">Senha</label>
-          <input id="password" name="password" type="password" autoComplete="current-password" placeholder="Digite sua senha" />
-
-          <button type="button" disabled title="O primeiro acesso ainda precisa ser definido">Entrar</button>
-          <p className="login-note" id="login-note">A autenticação será conectada depois que o processo de primeiro acesso for definido.</p>
-        </form>
+        <LoginForm />
 
         <Link className="back-link" href="/">← Voltar para a página inicial</Link>
       </section>

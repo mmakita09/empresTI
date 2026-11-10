@@ -34,7 +34,9 @@ produção.
 
 O script `skills/imagens-equipamentos/scripts/prepare_manifest.mjs` prepara
 candidatos e finaliza imagens aprovadas localmente. O manifesto foi revisado,
-as imagens foram processadas em 800×600 e o seed local foi executado.
+as imagens foram processadas em 800×600, copiadas para `public/catalog-images`
+e o catálogo mostra o crédito “Fotos: Pixabay” com o link de origem. A
+produção não depende de URLs temporárias de 24 horas.
 
 ## Verificação
 

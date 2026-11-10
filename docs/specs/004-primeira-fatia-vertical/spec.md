@@ -14,7 +14,7 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 - Catálogo com situação dos equipamentos.
 - Solicitação de item disponível.
 - Visão de empréstimos em aberto para Operações.
-- Limite de três itens, prazo de 14 dias e bloqueio por atraso.
+- Limite de cinco itens, prazo de 14 dias úteis e bloqueio por atraso.
 
 ## Decisões já existentes
 
@@ -29,9 +29,6 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 - O limite adotado para empréstimos em aberto é de cinco itens, conforme o PRD v2 e a Spec 006.
 - Item devolvido com avaria muda diretamente para `MANUTENÇÃO` e deixa de estar disponível.
 - O primeiro administrador é criado manualmente no Supabase e vinculado por seed/configuração controlada.
-
-## Regras que dependem de resposta
-
 
 ## Critérios de aceitação provisórios
 

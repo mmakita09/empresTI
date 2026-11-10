@@ -54,6 +54,20 @@ PRONTA` porque o código de produto ainda não foi implementado.
   foi validado no banco local.
 - O Supabase remoto não foi alterado.
 
+### Implementação da primeira fatia
+
+- Login usa Supabase Auth; `/catalogo` é protegido por middleware.
+- Catálogo e empréstimos usam procedimentos tRPC protegidos por sessão e
+  membership do tenant.
+- Devoluções registram avaria e encaminham o equipamento para `MANUTENÇÃO`.
+- Operações lista empréstimos abertos e exige papel `ADMIN` ou `OPERATIONS`.
+- Foram adicionados testes de regras de empréstimo e de proteção/tenant no tRPC.
+- Validação Docker mais recente: build aprovado, 10 testes aprovados em 5
+  arquivos e lint sem erros; há apenas o aviso padrão de otimização de `<img>`.
+- O verificador independente ainda precisa registrar o veredito final após este
+  conjunto de commits. A jornada com conta real do Supabase não foi declarada
+  validada sem uma sessão real.
+
 ## Fora desta entrega
 
 Não foram criados usuário real, migration remota, seed remoto, bucket público,

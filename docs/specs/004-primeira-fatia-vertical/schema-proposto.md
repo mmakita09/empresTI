@@ -23,5 +23,5 @@ A migration apenas adicionará tabelas e tipos; não altera a tabela `tenants` n
 ## Pontos ainda não fechados
 
 - `due_at` será calculado como 14 dias úteis, conforme a decisão registrada no PRD e na Spec 006.
-- Os estados de equipamento dependem do tratamento de avaria.
-- O vínculo inicial de administrador depende do processo de bootstrap.
+- Devolução com avaria atualiza o equipamento diretamente para `MANUTENÇÃO` e registra o evento de auditoria.
+- O primeiro administrador não nasce no cadastro aberto: será criado manualmente no Supabase e vinculado por seed/configuração controlada.

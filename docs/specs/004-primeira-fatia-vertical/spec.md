@@ -1,8 +1,8 @@
-# Spec 004 — Primeira fatia vertical do produto (aguarda duas decisões)
+# Spec 004 — Primeira fatia vertical do produto (decisões fechadas)
 
 ## Estado
 
-**Não aprovada.** Este documento reúne o menor fluxo que liga banco, servidor e interface. O código desta funcionalidade não pode começar enquanto as duas perguntas ao final estiverem abertas e a migration proposta não for aprovada.
+**Decisões fechadas; migration ainda não aprovada.** Este documento reúne o menor fluxo que liga banco, servidor e interface. O código desta funcionalidade só pode começar depois da aprovação do DDL, da migration e do plano de execução.
 
 ## Objetivo
 
@@ -27,11 +27,11 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 - A solicitação cria o empréstimo imediatamente, sem aprovação, conforme o PRD e a Spec 006.
 - O prazo padrão é de 14 dias úteis, conforme o PRD e a Spec 006.
 - O limite adotado para empréstimos em aberto é de cinco itens, conforme o PRD v2 e a Spec 006.
+- Item devolvido com avaria muda diretamente para `MANUTENÇÃO` e deixa de estar disponível.
+- O primeiro administrador é criado manualmente no Supabase e vinculado por seed/configuração controlada.
 
 ## Regras que dependem de resposta
 
-- Estado atribuído ao equipamento devolvido com avaria.
-- Como nasce o primeiro administrador antes de ele poder convidar outras pessoas.
 
 ## Critérios de aceitação provisórios
 
@@ -60,7 +60,6 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 - Rotas protegidas de catálogo, empréstimos e Operações.
 - Variáveis públicas do Supabase já listadas em `.env.example`.
 
-## Perguntas que bloqueiam plano, tarefas e código
+## Pendência de execução
 
-1. Item devolvido com avaria vai direto para manutenção ou aguarda avaliação em outro estado?
-2. O primeiro administrador será criado manualmente no Supabase e vinculado por seed/configuração controlada, ou existe outro processo?
+- Aprovar o DDL/schema proposto e a migration antes de alterar `prisma/schema.prisma` ou criar migration.

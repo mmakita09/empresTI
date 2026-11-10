@@ -150,6 +150,8 @@ Cada item exige sua verificação. Não marcar a lista inteira como concluída p
 - Build Docker, testes e lint foram executados após essa atualização.
 - A Spec 004 foi reconciliada com decisões já registradas no PRD e na Spec 006:
   solicitação imediata, prazo de 14 dias úteis e limite de cinco empréstimos.
-- Permanecem bloqueios reais somente para o tratamento de avaria e o bootstrap
-  do primeiro administrador. A primeira fatia vertical continua sem aprovação e
-  não foi implementada.
+- As quatro decisões da Spec 004 estão registradas: solicitação imediata, 14
+  dias úteis, avaria encaminhada para `MANUTENÇÃO` e primeiro administrador
+  criado manualmente no Supabase com vínculo controlado.
+- A primeira fatia vertical continua sem implementação até a aprovação do DDL,
+  da migration e do plano de execução, conforme `rules/migration.md`.

@@ -12,7 +12,8 @@ Docker local. O seed idempotente dos 12 equipamentos foi executado no banco loca
   os outros 10 estão disponíveis, mas a lista detalhada marca também TI-0010
   como manutenção. A lista detalhada por patrimônio foi adotada como fonte,
   e a divergência permanece registrada na Spec 005.
-- O PRD ainda não decide criação de conta, devolução e avaria.
+- A Spec 004 agora registra criação manual do primeiro administrador e avaria
+  encaminhada diretamente para `MANUTENÇÃO`.
 - A conta de correção e o upload das imagens dependem de autorização para
   produção e de uma chave Pixabay fornecida como segredo, nunca no repositório.
 
@@ -36,11 +37,11 @@ as imagens foram processadas em 800×600 e o seed local foi executado.
 
 ## Verificação
 
-O verificador de specs é independente, não edita nem publica. A rodada final
-foi executada com erro plantado controlado e confirmou o veredito **NÃO PRONTA**
-para a Spec 004: os CA-01 a CA-05 e CA-07 a CA-09 não têm implementação; CA-06
-tem conflito entre o limite de três itens da spec e cinco itens do PRD v2.
-Também faltam `plan.md` e `tasks.md` aprovados para a Spec 004.
+O verificador de specs é independente, não edita nem publica. A rodada mais
+recente confirmou o veredito **NÃO PRONTA** para a Spec 004: os CA-01 a CA-09
+ainda não têm implementação nem testes de produto. `plan.md` e `tasks.md` já
+existem; a migration continua aguardando aprovação do DDL. Os checks Docker
+não puderam ser repetidos nesta rodada porque o daemon estava indisponível.
 
 ## Fora desta entrega
 

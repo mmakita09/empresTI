@@ -19,7 +19,7 @@ export default function CatalogPage() {
     <section className="catalog-grid" aria-label="Equipamentos">
       {catalog.data.equipment.map((item) => <article className="catalog-card" key={item.id}>
         <img src={item.imageUrl} alt="" />
-        <div><p className="catalog-meta">{item.patrimony} · {item.category}</p><h2>{item.name}</h2><p>{item.situation === "AVAILABLE" ? "Disponível" : item.situation === "MAINTENANCE" ? "Em manutenção" : "Emprestado"}</p></div>
+        <div><p className="catalog-meta">{item.patrimony} · {item.category}</p><h2>{item.name}</h2><p>{item.situation === "AVAILABLE" ? "Disponível" : item.situation === "MAINTENANCE" ? "Em manutenção" : "Emprestado"}</p><p className="catalog-credit">Fotos: <a href={item.imageCredit.sourceUrl} target="_blank" rel="noreferrer">Pixabay</a> · {item.imageCredit.photographer}</p></div>
         {item.situation === "AVAILABLE" && <button className="primary-action" type="button" disabled={createLoan.isPending} onClick={() => createLoan.mutate({ tenantId: catalog.data.tenantId!, equipmentId: item.id })}>{createLoan.isPending ? "Solicitando…" : "Solicitar"}</button>}
       </article>)}
     </section>

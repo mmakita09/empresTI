@@ -53,7 +53,7 @@ async function finalize() {
     if (!source.ok) throw new Error(`${item.patrimony}: falha ao baixar a imagem.`);
     const output = path.join(imageDir, `${item.patrimony}.jpg`);
     await sharp(Buffer.from(await source.arrayBuffer())).resize(800, 600, { fit: "cover" }).jpeg({ quality: 85 }).toFile(output);
-    manifest.push({ patrimony: item.patrimony, name: item.name, category: item.category, situation: ["TI-0004", "TI-0007", "TI-0010"].includes(item.patrimony) ? "MAINTENANCE" : "AVAILABLE", imageUrl: `catalog-images/${item.patrimony}.jpg`, pixabayImageId: item.selected.imageId, sourceUrl: item.selected.pageURL, photographer: item.selected.photographer, license: "Pixabay Content License", width: 800, height: 600 });
+    manifest.push({ patrimony: item.patrimony, name: item.name, category: item.category, situation: ["TI-0004", "TI-0007", "TI-0010"].includes(item.patrimony) ? "MAINTENANCE" : "AVAILABLE", imageUrl: `/catalog-images/${item.patrimony}.jpg`, pixabayImageId: item.selected.imageId, sourceUrl: item.selected.pageURL, photographer: item.selected.photographer, license: "Pixabay Content License", width: 800, height: 600 });
   }
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2));
   console.log(`Manifesto final salvo em ${manifestPath}.`);

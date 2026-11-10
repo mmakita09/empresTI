@@ -19,9 +19,10 @@ async function ensureBootstrapAdmin(userId: string) {
 }
 
 export async function getAuthenticatedUserId(): Promise<string | null> {
-  if (!env.NEXT_PUBLIC_SUPABASE_URL || !env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return null;
+  const key = env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!env.NEXT_PUBLIC_SUPABASE_URL || !key) return null;
   const cookieStore = await cookies();
-  const supabase = createServerClient(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {
+  const supabase = createServerClient(env.NEXT_PUBLIC_SUPABASE_URL, key, {
     cookies: {
       getAll: () => cookieStore.getAll(),
       setAll: (values) => {

@@ -66,6 +66,10 @@ jornada ser observada.
   lint sem erros; há apenas o aviso padrão de otimização de `<img>`.
 - A variável controlada do primeiro administrador foi cadastrada no Vercel em
   Production. O redeploy ainda exige a verificação de identidade da conta.
+- A conta Auth e as variáveis públicas do Supabase foram configuradas, mas a
+  jornada real ainda retorna erro porque o banco remoto não recebeu as
+  migrations Prisma. A aplicação confirma conexão, porém as tabelas de
+  domínio ainda não existem no schema remoto.
 
 ## Fora desta entrega
 

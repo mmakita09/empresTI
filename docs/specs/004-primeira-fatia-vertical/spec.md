@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Decisões e migration local fechadas; verificação pendente.** Este documento reúne o menor fluxo que liga banco, servidor e interface. A migration foi validada no PostgreSQL local e a implementação inicial dos fluxos foi criada; ainda faltam validação integral e jornada com conta real.
+**Decisões, migration e verificação fechadas.** Este documento reúne o menor fluxo que liga banco, servidor e interface. A migration foi validada no PostgreSQL local e aplicada no Supabase remoto; os critérios CA-01 a CA-09 foram verificados com testes e jornada real.
 
 ## Objetivo
 

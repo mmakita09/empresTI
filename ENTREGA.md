@@ -37,12 +37,11 @@ as imagens foram processadas em 800×600 e o seed local foi executado.
 
 ## Verificação
 
-O verificador de specs é independente, não edita nem publica. A rodada mais
-recente confirmou o veredito **NÃO PRONTA** para a Spec 004: os CA-01 a CA-09
-ainda não têm implementação nem testes de produto. `plan.md` e `tasks.md` já
-existem; a migration foi aprovada e validada localmente. Os checks Docker
-foram repetidos após o daemon voltar e passaram; o veredito continua `NÃO
-PRONTA` porque o código de produto ainda não foi implementado.
+O verificador de specs é independente, não edita nem publica. A rodada atual
+confirmou implementação dos critérios CA-02 a CA-09, com 19 testes passando no
+Docker. CA-01 ainda depende de comprovação com uma sessão real do Supabase e
+o deploy de produção; portanto o veredito permanece **NÃO PRONTA** até essa
+jornada ser observada.
 
 ### Atualização após autorização do DDL
 
@@ -61,18 +60,18 @@ PRONTA` porque o código de produto ainda não foi implementado.
   membership do tenant.
 - Devoluções registram avaria e encaminham o equipamento para `MANUTENÇÃO`.
 - Operações lista empréstimos abertos e exige papel `ADMIN` ou `OPERATIONS`.
-- Foram adicionados testes de regras de empréstimo e de proteção/tenant no tRPC.
-- Validação Docker mais recente: build aprovado, 10 testes aprovados em 5
-  arquivos e lint sem erros; há apenas o aviso padrão de otimização de `<img>`.
-- O verificador independente ainda precisa registrar o veredito final após este
-  conjunto de commits. A jornada com conta real do Supabase não foi declarada
-  validada sem uma sessão real.
+- Foram adicionados testes de regras, tenant, autenticação, visibilidade do
+  colaborador, concorrência, devolução e auditoria no tRPC/PostgreSQL.
+- Validação Docker mais recente: build aprovado, 19 testes em 7 arquivos e
+  lint sem erros; há apenas o aviso padrão de otimização de `<img>`.
+- A variável controlada do primeiro administrador foi cadastrada no Vercel em
+  Production. O redeploy ainda exige a verificação de identidade da conta.
 
 ## Fora desta entrega
 
-Não foram criados usuário real, migration remota, seed remoto, bucket público,
-upload de fotos ou deploy adicional. Essas ações exigem confirmação explícita
-e dados secretos fora do chat.
+Não foram executadas migration remota, seed remoto, bucket público ou upload
+de fotos. A validação da sessão real e do redeploy depende da autenticação do
+proprietário no Vercel/Supabase.
 
 ## Links
 

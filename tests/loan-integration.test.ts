@@ -23,7 +23,7 @@ describe("primeira fatia no PostgreSQL local", () => {
     await expect(prisma.loan.create({ data: { tenantId: tenant.id, equipmentId: equipment.id, borrowerMembershipId: membership.id, dueAt: new Date("2030-01-01T00:00:00.000Z") } })).rejects.toThrow();
   });
 
-  it("CA-08 registra devolução, horário e avaria em manutenção", async () => {
+  it("CA-08 e CA-09 registra devolução, horário, avaria e auditoria append-only", async () => {
     const tenant = await prisma.tenant.findFirstOrThrow();
     const equipment = await prisma.equipment.findFirstOrThrow({ where: { tenantId: tenant.id } });
     const membership = await prisma.membership.create({ data: { tenantId: tenant.id, authUserId: crypto.randomUUID(), role: "OPERATIONS" } });
@@ -37,5 +37,6 @@ describe("primeira fatia no PostgreSQL local", () => {
     expect(returned.damageReported).toBe(true);
     expect(updatedEquipment.situation).toBe("MAINTENANCE");
     expect(audit.entityId).toBe(loan.id);
+    expect(await prisma.auditEvent.count({ where: { loanId: loan.id } })).toBeGreaterThan(0);
   });
 });

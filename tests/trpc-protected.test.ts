@@ -55,4 +55,12 @@ describe("procedures protegidas", () => {
     const caller = appRouter.createCaller({ requestId: "test", userId });
     await expect(caller.operations.openLoans({ tenantId })).rejects.toMatchObject({ code: "FORBIDDEN" });
   });
+
+  it("CA-07 lista empréstimos do tenant para Operações", async () => {
+    mocks.membershipFindFirst.mockResolvedValue({ id: membershipId, tenantId, authUserId: userId, role: "OPERATIONS" });
+    mocks.loanFindMany.mockResolvedValue([]);
+    const caller = appRouter.createCaller({ requestId: "test", userId });
+    await caller.operations.openLoans({ tenantId });
+    expect(mocks.loanFindMany).toHaveBeenCalledWith(expect.objectContaining({ where: { tenantId, status: "ACTIVE" } }));
+  });
 });

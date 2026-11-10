@@ -1,6 +1,6 @@
-# Schema proposto — aguarda aprovação
+# Schema implementado — migration local validada
 
-Este arquivo não é uma migration. Ele apresenta a mudança antes da execução, conforme `rules/migration.md`.
+A migration correspondente foi criada e aplicada no PostgreSQL local para a primeira fatia vertical, conforme `rules/migration.md`.
 
 ## Entidades
 
@@ -20,8 +20,8 @@ Cada nova tabela terá RLS habilitado e policy `deny_by_default` para impedir ac
 
 A migration apenas adicionará tabelas e tipos; não altera a tabela `tenants` nem linhas existentes. A reversão remove as novas tabelas, índices e tipos, portanto perde qualquer dado criado depois da aplicação e só é aceitável antes de uso real.
 
-## Pontos ainda não fechados
+## Decisões registradas
 
-- `due_at` será calculado como 14 dias úteis, conforme a decisão registrada no PRD e na Spec 006.
+- `due_at` é calculado como 14 dias úteis, conforme a decisão registrada no PRD e na Spec 006.
 - Devolução com avaria atualiza o equipamento diretamente para `MANUTENÇÃO` e registra o evento de auditoria.
-- O primeiro administrador não nasce no cadastro aberto: será criado manualmente no Supabase e vinculado por seed/configuração controlada.
+- O primeiro administrador não nasce no cadastro aberto: é vinculado por configuração controlada ao usuário Auth criado no Supabase.

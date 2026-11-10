@@ -2,7 +2,7 @@
 
 ## Estado
 
-**Decisões e migration local fechadas; código de produto pendente.** Este documento reúne o menor fluxo que liga banco, servidor e interface. A migration foi validada no PostgreSQL local; o código da funcionalidade ainda precisa ser implementado e verificado.
+**Decisões e migration local fechadas; verificação pendente.** Este documento reúne o menor fluxo que liga banco, servidor e interface. A migration foi validada no PostgreSQL local e a implementação inicial dos fluxos foi criada; ainda faltam validação integral e jornada com conta real.
 
 ## Objetivo
 
@@ -59,4 +59,4 @@ Permitir que uma pessoa previamente convidada entre no sistema, veja o catálogo
 
 ## Pendência de execução
 
-- Implementar servidor, autorização, interface e testes de todos os critérios de aceitação.
+- Executar os testes de todos os critérios de aceitação e validar a jornada com conta real do Supabase.

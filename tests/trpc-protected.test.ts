@@ -63,4 +63,12 @@ describe("procedures protegidas", () => {
     await caller.operations.openLoans({ tenantId });
     expect(mocks.loanFindMany).toHaveBeenCalledWith(expect.objectContaining({ where: { tenantId, status: "ACTIVE" } }));
   });
+
+  it("CA-07 restringe o colaborador aos próprios empréstimos", async () => {
+    mocks.membershipFindFirst.mockResolvedValue({ id: membershipId, tenantId, authUserId: userId, role: "COLLABORATOR" });
+    mocks.loanFindMany.mockResolvedValue([]);
+    const caller = appRouter.createCaller({ requestId: "test", userId });
+    await caller.loans.mine({ tenantId });
+    expect(mocks.loanFindMany).toHaveBeenCalledWith(expect.objectContaining({ where: { tenantId, borrowerMembershipId: membershipId, status: "ACTIVE" } }));
+  });
 });
